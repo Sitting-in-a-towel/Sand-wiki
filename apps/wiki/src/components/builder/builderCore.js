@@ -199,19 +199,19 @@ export function checkPaths(state) {
 
 // Editable sockets of a placement (world-space) for door/hatch toggles.
 // -> [{key, x,y,z, dir, type, states:[...] }]
+// Returns part-LOCAL cell + local direction per editable socket. The scene positions
+// the marker through the placed mesh's own transform (which already bakes in the
+// pivot offset, footprint centring, Z-flip and rotation), so markers sit exactly on
+// the model instead of on the raw grid cell (which mirrored them to the wrong side).
 export function editableSockets(part, pl) {
   const out = []
-  const cells = worldCells(part, pl.x, pl.y, pl.z, pl.rot)
-  cells.forEach((c, ci) => {
-    for (const [dir, ss] of Object.entries(c.sockets)) {
+  part.cells.forEach((c, ci) => {
+    for (const [dir, ss] of Object.entries(c.s || {})) {
       for (const s of ss) {
         if (!s.e) continue
         const states = Object.keys(SOCKET_STATES[s.t] ?? { DEFAULT: '' })
           .filter((st) => !(s.bl ?? []).includes(st))
-        out.push({
-          key: `${ci}|${dir}`,
-          x: c.x, y: c.y, z: c.z, dir, type: s.t, states,
-        })
+        out.push({ key: `${ci}|${dir}`, cell: c.p, dir, type: s.t, states })
       }
     }
   })
