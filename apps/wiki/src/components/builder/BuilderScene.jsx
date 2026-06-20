@@ -552,8 +552,19 @@ export default function BuilderScene({
         // chassis: align mesh TOP to deck-0 floor (plate hangs below, legs to ground)
         const meta = MESH_INDEX[state.chassisId]
         const b = meta.b
-        m.position.set(-(b[0] + b[3]) / 2, -b[4], -(b[2] + b[5]) / 2)
+        // Centre the deck on its CELL footprint (not the mesh bbox), so the deck lines
+        // up with the grid + placed parts, which are all positioned in cell space.
+        const fcells = worldCells(ch, 0, 0, 0, 0)
+        const fxs = fcells.map((c) => c.x), fzs = fcells.map((c) => c.z)
+        const fcx = ((Math.min(...fxs) + Math.max(...fxs)) / 2) * CELL_XZ
+        const fcz = ((Math.min(...fzs) + Math.max(...fzs)) / 2) * CELL_XZ
+        m.position.set(fcx - (b[0] + b[3]) / 2, -b[4], fcz - (b[2] + b[5]) / 2)
         rigGroup.add(m)
+        // re-centre the camera on the build when the chassis changes (not every edit)
+        if (st.lastChassis !== state.chassisId) {
+          st.lastChassis = state.chassisId
+          st.target.set(fcx, 4, fcz)
+        }
       }
 
       // legs: the articulated walker leg (posed glTF). Pin each leg's hip pivot
