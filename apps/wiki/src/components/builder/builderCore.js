@@ -77,7 +77,7 @@ export function chassisLegs(chassis) {
   const k = (x, z) => `${x},${z}`
   const set = new Map(noVol.map((c) => [k(c[0], c[1]), c]))
   const seen = new Set()
-  const clusters = []
+  const comps = []
   for (const c of noVol) {
     if (seen.has(k(c[0], c[1]))) continue
     const stack = [c]; seen.add(k(c[0], c[1])); const group = []
@@ -88,11 +88,44 @@ export function chassisLegs(chassis) {
         if (set.has(nk) && !seen.has(nk)) { seen.add(nk); stack.push(set.get(nk)) }
       }
     }
-    clusters.push(group)
+    comps.push(group)
   }
-  return clusters.map((g) => {
-    const cx = g.reduce((s, c) => s + c[0], 0) / g.length
-    const cz = g.reduce((s, c) => s + c[1], 0) / g.length
+  // Use the chassis' declared leg count (data `legs` field, e.g. 5x3 = 6). Most chassis
+  // space their leg cells so each flood-fill component IS one leg — but some (5x3, 4x6)
+  // encode an UNBROKEN side-strip per side, which would collapse to one "leg" each. So
+  // split the declared count across components by size, spacing legs evenly along a strip.
+  const legsTotal = Number.isFinite(chassis.legs) && chassis.legs > 0 ? chassis.legs : comps.length
+  const totalCells = comps.reduce((s, g) => s + g.length, 0)
+  const quota = comps.map((g) => (legsTotal * g.length) / totalCells)
+  const base = quota.map((q) => Math.max(1, Math.floor(q)))
+  let assigned = base.reduce((s, n) => s + n, 0)
+  while (assigned < legsTotal) { // largest-remainder: add a leg to the most-deserving strip
+    let best = 0
+    for (let i = 1; i < comps.length; i++) if (quota[i] - base[i] > quota[best] - base[best]) best = i
+    base[best]++; assigned++
+  }
+  while (assigned > legsTotal) { // trim from a strip that has >1 and the smallest remainder
+    let best = -1
+    for (let i = 0; i < comps.length; i++) if (base[i] > 1 && (best < 0 || quota[i] - base[i] < quota[best] - base[best])) best = i
+    if (best < 0) break
+    base[best]--; assigned--
+  }
+  const pts = []
+  comps.forEach((g, i) => {
+    if (base[i] <= 1) {
+      // single leg → component centroid (identical to the old behaviour for spaced chassis)
+      pts.push([g.reduce((s, c) => s + c[0], 0) / g.length, g.reduce((s, c) => s + c[1], 0) / g.length])
+    } else {
+      // multiple legs on one strip → space them evenly along the strip's long axis
+      const xs = g.map((c) => c[0]), zs = g.map((c) => c[1])
+      const alongX = (Math.max(...xs) - Math.min(...xs)) >= (Math.max(...zs) - Math.min(...zs))
+      const sorted = [...g].sort((a, b) => (alongX ? a[0] - b[0] : a[1] - b[1]))
+      for (let j = 0; j < base[i]; j++) pts.push(sorted[Math.round((j * (sorted.length - 1)) / (base[i] - 1))])
+    }
+  })
+  const used = new Set(), uniq = [] // dedupe (rounding safety)
+  for (const p of pts) { const key = k(p[0], p[1]); if (!used.has(key)) { used.add(key); uniq.push(p) } }
+  return uniq.map(([cx, cz]) => {
     const outX = cx < dminX ? dminX - cx : cx > dmaxX ? cx - dmaxX : 0
     const outZ = cz < dminZ ? dminZ - cz : cz > dmaxZ ? cz - dmaxZ : 0
     let fx = 0, fz = 0
