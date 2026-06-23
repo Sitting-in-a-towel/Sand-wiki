@@ -405,6 +405,15 @@ export default function BuilderV2() {
       p.name.toLowerCase().includes(q.toLowerCase()) || p.id.toLowerCase().includes(q.toLowerCase())),
     [q],
   )
+  // Hull picker honours "Match my tech tree" just like the parts list: when on, only show
+  // chassis whose tech node is unlocked (chassis with no tech node are always available).
+  // The currently-selected hull stays visible even if locked, so you never lose your build.
+  const chassisShown = useMemo(() => chassisList.filter((c) => {
+    if (!matchTech) return true
+    if (c.id === state.chassisId) return true
+    const t = partTech[c.id]
+    return !t || unlockedNodes.has(t.node)
+  }), [matchTech, unlockedNodes, state.chassisId])
 
   const essentialsState = ESSENTIALS.map((e) => ({ ...e, ok: man.groups.has(e.group) }))
   const selectedPl = state.placements.find((p) => p.id === selectedId)
@@ -565,10 +574,10 @@ export default function BuilderV2() {
               <div className="tb-cat-head static">
                 <span className="tb-cat-dot" style={{ '--cat': CAT_COLOR.Chassis }} />
                 ① Choose a hull
-                <span className="tb-cat-count">{chassisList.length}</span>
+                <span className="tb-cat-count">{chassisShown.length}{matchTech && chassisShown.length < chassisList.length ? ` / ${chassisList.length}` : ''}</span>
               </div>
               <div className="tb-cat-body tb-chassis-grid">
-                {chassisList.map((c) => (
+                {chassisShown.map((c) => (
                   <button
                     key={c.id}
                     type="button"
