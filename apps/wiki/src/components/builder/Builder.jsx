@@ -18,7 +18,7 @@ import {
   PARTS, PART_BY_ID, GROUP_LIMITS, MEMBER_LIMIT, ESSENTIALS,
   CAT_COLOR, CATEGORY_ORDER, buildOccupancy, validate, manifest,
   encodeShare, decodeShare, editableSockets, checkPaths,
-  costBreakdown, COST_ROWS,
+  costBreakdown, COST_ROWS, randomTrampler,
 } from './builderCore.js'
 import { decodeWbt, wbtToState } from './wbtImport.js'
 import { downloadWbt } from './wbtExport.js'
@@ -107,6 +107,10 @@ export default function BuilderV2() {
   const [shareText, setShareText] = useState('')
   const [pubOpen, setPubOpen] = useState(false)
   const [clearOpen, setClearOpen] = useState(false)
+  const [randomOpen, setRandomOpen] = useState(false)
+  const [randomOpts, setRandomOpts] = useState({
+    chassisId: 'random', crew: 2, speed: 'balanced', attack: 'medium', defense: 'medium', cost: 'balanced',
+  })
   const [pub, setPub] = useState({ name: '' })
   const [pubThumb, setPubThumb] = useState(null)
   const [pubBusy, setPubBusy] = useState(false)
@@ -314,6 +318,18 @@ export default function BuilderV2() {
     setSelectedId(null)
   }
 
+  // Generate a random, valid trampler from the chosen knobs. Respects the tech tree when
+  // "Match my tech tree" is on (only uses unlocked parts).
+  function doRandomize() {
+    const allow = matchTech
+      ? new Set(PARTS.filter((p) => { const t = partTech[p.id]; return !t || unlockedNodes.has(t.node) }).map((p) => p.id))
+      : null
+    setState({ ...DEFAULT_STATE, ...randomTrampler({ ...randomOpts, allow }) })
+    setSelectedId(null)
+    setRandomOpen(false)
+    flash('randomised a valid rig')
+  }
+
   function toggleSocket(plId, key) {
     setState((s) => ({
       ...s,
@@ -461,6 +477,42 @@ export default function BuilderV2() {
         <ToolNavBrand title="Trampler Builder" />
         <ToolNav active="builder" />
         <span className="spacer" />
+        <div className="tb-rand-wrap">
+          <button type="button" className={actionButtonClass} onClick={() => setRandomOpen((v) => !v)}>🎲 Randomize</button>
+          {randomOpen && (
+            <div className="tb-rand-pop">
+              <div className="tb-rand-h">Randomizer</div>
+              <label className="tb-rand-row">
+                <span>Hull</span>
+                <select className="tb-select" value={randomOpts.chassisId} onChange={(e) => setRandomOpts((o) => ({ ...o, chassisId: e.target.value }))}>
+                  <option value="random">Random</option>
+                  {chassisList.map((c) => <option key={c.id} value={c.id}>{c.label ?? c.name}</option>)}
+                </select>
+              </label>
+              <label className="tb-rand-row">
+                <span>Crew size</span>
+                <select className="tb-select" value={randomOpts.crew} onChange={(e) => setRandomOpts((o) => ({ ...o, crew: Number(e.target.value) }))}>
+                  {[0, 1, 2, 3, 4, 5, 6].map((n) => <option key={n} value={n}>{n}</option>)}
+                </select>
+              </label>
+              {[
+                ['speed', 'Speed', ['slow', 'balanced', 'fast']],
+                ['attack', 'Attack', ['low', 'medium', 'high']],
+                ['defense', 'Defense', ['low', 'medium', 'high']],
+                ['cost', 'Cost', ['cheap', 'balanced', 'expensive']],
+              ].map(([key, label, vals]) => (
+                <label key={key} className="tb-rand-row">
+                  <span>{label}</span>
+                  <select className="tb-select" value={randomOpts[key]} onChange={(e) => setRandomOpts((o) => ({ ...o, [key]: e.target.value }))}>
+                    {vals.map((v) => <option key={v} value={v}>{v[0].toUpperCase() + v.slice(1)}</option>)}
+                  </select>
+                </label>
+              ))}
+              <button type="button" className="tb-rand-go" onClick={doRandomize}>🎲 Generate rig</button>
+              <div className="tb-rand-note">Replaces your current build with a fresh valid random rig.</div>
+            </div>
+          )}
+        </div>
         <button type="button" className={actionButtonClass} onClick={doExport}>Share code</button>
         <button type="button" className={actionButtonClass} onClick={() => { setShareText(''); setImportOpen(true) }}>Import</button>
         <button type="button" className={actionButtonClass} onClick={() => setLoadOpen(true)}>

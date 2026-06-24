@@ -457,3 +457,84 @@ export const COST_ROWS = [
   ['pneumatic', 'Pneumatic Parts', '/icons/icon_item_resourceMetal_t2.png'],
   ['computing', 'Computing Module', '/icons/icon_item_resourceMetal_t3.png'],
 ]
+
+// ---- random trampler generator ----
+// Builds a VALID trampler by construction: place the required parts first (so it's a legal
+// rig), then weighted extras per the knobs, vetting every candidate spot through validate()
+// so nothing invalid is ever committed. No random-and-pray.
+//   opts = { chassisId?, crew:0-6, speed:slow|balanced|fast, attack:low|medium|high,
+//            defense:low|medium|high, cost:cheap|balanced|expensive, allow?:Set<partId> }
+//   allow = optional set of usable part ids (tech-tree filter); omit for all.
+const _placeable = (p) => p.category !== 'Chassis' && !p.id.endsWith('_mirror')
+const _byGroup = (g) => PARTS.filter((p) => _placeable(p) && (p.groups ?? []).includes(g))
+const _byCategory = (cats) => PARTS.filter((p) => _placeable(p) && cats.includes(p.category))
+
+function _partCost(id) {
+  const c = partCosts[id] || {}
+  return (c.crowns || 0) + (c.mechanical || 0) + (c.pneumatic || 0) + (c.computing || 0)
+}
+function _shuffle(arr, rng) {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1));[a[i], a[j]] = [a[j], a[i]] }
+  return a
+}
+// Pick a part from a pool, honouring the tech-tree allow-set and the cost knob.
+function _pick(pool, opts, rng) {
+  let cands = pool
+  if (opts.allow) { const f = pool.filter((p) => opts.allow.has(p.id)); if (f.length) cands = f }
+  if (!cands.length) return null
+  if (opts.cost === 'cheap' || opts.cost === 'expensive') {
+    const sorted = [...cands].sort((a, b) => _partCost(a.id) - _partCost(b.id))
+    const half = Math.max(1, Math.ceil(sorted.length / 2))
+    cands = opts.cost === 'cheap' ? sorted.slice(0, half) : sorted.slice(-half)
+  }
+  return cands[Math.floor(rng() * cands.length)]
+}
+// Candidate anchor cells = the chassis deck footprint, levels 1..3 (stacking), shuffled.
+function _candidateCells(state, rng) {
+  const ch = PART_BY_ID[state.chassisId]
+  if (!ch) return []
+  const deck = worldCells(ch, 0, 0, 0, 0).filter((c) => c.vol)
+  const cells = []
+  for (const c of deck) for (let y = 1; y <= 3; y++) cells.push({ x: c.x, y, z: c.z })
+  return _shuffle(cells, rng)
+}
+function _findSpot(state, partId, rng) {
+  const occ = buildOccupancy(state)
+  for (const { x, y, z } of _candidateCells(state, rng)) {
+    for (const rot of _shuffle([0, 1, 2, 3], rng)) {
+      if (validate(state, occ, partId, x, y, z, rot).ok) return { x, y, z, rot }
+    }
+  }
+  return null
+}
+
+export function randomTrampler(opts = {}) {
+  const rng = Math.random
+  const chassisPool = PARTS.filter((p) => p.category === 'Chassis')
+  const chassisId = (opts.chassisId && opts.chassisId !== 'random' && PART_BY_ID[opts.chassisId])
+    ? opts.chassisId
+    : (_pick(chassisPool, opts, rng)?.id ?? chassisPool[0]?.id)
+  let state = { v: 2, name: 'RANDOM RIG', chassisId, placements: [] }
+  let idc = 1
+  const tryPlace = (partId) => {
+    if (!partId) return false
+    const spot = _findSpot(state, partId, rng)
+    if (!spot) return false
+    state = { ...state, placements: [...state.placements, { id: `r${idc++}`, partId, x: spot.x, y: spot.y, z: spot.z, rot: spot.rot, conns: {} }] }
+    return true
+  }
+  const N = { low: 1, medium: 3, high: 6, slow: 0, balanced: 1, fast: 2 }
+  // 1) essentials — one per required group, so the rig is valid
+  for (const { group } of ESSENTIALS) tryPlace(_pick(_byGroup(group), opts, rng)?.id)
+  // 2) crew quarters up to the requested size
+  const crew = Math.max(0, Math.min(MEMBER_LIMIT, opts.crew ?? 2))
+  for (let i = 0; i < crew; i++) tryPlace(_pick(_byGroup('CREW'), opts, rng)?.id)
+  // 3) weapons (attack), engines (speed), armour (defense)
+  for (let i = 0; i < (N[opts.attack] ?? 3); i++) tryPlace(_pick(_byGroup('WEAPONE'), opts, rng)?.id)
+  for (let i = 0; i < (N[opts.speed] ?? 1); i++) tryPlace(_pick(_byGroup('ENGINE'), opts, rng)?.id)
+  for (let i = 0; i < (N[opts.defense] ?? 3); i++) tryPlace(_pick(_byCategory(['Armor']), opts, rng)?.id)
+  // 4) round it out with a few deck/cargo/balcony pieces
+  for (let i = 0; i < 4; i++) tryPlace(_pick(_byCategory(['Deck', 'Cargo', 'Balcony']), opts, rng)?.id)
+  return state
+}

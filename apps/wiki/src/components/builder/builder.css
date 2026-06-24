@@ -334,3 +334,22 @@
 .bld-gate-btn.primary:hover { background: var(--primary-hover); color: #1a0f04; }
 .bld-gate-btn.ghost { border-color: transparent; color: var(--muted-foreground); }
 .bld-gate-btn.ghost:hover { color: var(--foreground); }
+
+/* ===== randomizer popover (top-bar 🎲 button + variable dropdowns) ===== */
+.tb-rand-wrap { position: relative; }
+.tb-rand-pop {
+  position: absolute; top: calc(100% + 6px); right: 0; z-index: 80; width: 244px;
+  background: var(--card); border: 1px solid var(--border-strong);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .45); padding: 12px; display: flex; flex-direction: column; gap: 8px;
+}
+.tb-rand-h { font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--primary); }
+.tb-rand-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 12px; color: var(--muted-foreground); }
+.tb-rand-row > span { flex: none; }
+.tb-rand-row .tb-select { width: 142px; padding: 5px 8px; font-size: 12px; }
+.tb-rand-go {
+  margin-top: 4px; padding: 8px; background: var(--primary); color: #1a0f04; border: none;
+  font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  font-size: 12px; cursor: pointer;
+}
+.tb-rand-go:hover { background: var(--primary-hover); }
+.tb-rand-note { font-size: 10.5px; color: var(--dim); line-height: 1.35; }
