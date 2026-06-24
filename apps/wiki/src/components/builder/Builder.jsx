@@ -99,6 +99,10 @@ export default function BuilderV2() {
   const [activeRot, setActiveRot] = useState(0)
   const [selectedId, setSelectedId] = useState(null)
   const [openCat, setOpenCat] = useState('Cargo')
+  // Hull picker + Essentials are collapsible (default open) so users can fold them away
+  // once their hull + required parts are in, to cut scrolling — re-open any time.
+  const [hullOpen, setHullOpen] = useState(true)
+  const [essOpen, setEssOpen] = useState(true)
   const [q, setQ] = useState('')
   // "Match my tech tree": when on, parts gated behind a not-yet-unlocked tech node
   // are shown locked (greyed, non-placeable). unlockedNodes mirrors the /tech planner.
@@ -569,49 +573,61 @@ export default function BuilderV2() {
             </button>
           </div>
           <div className="tb-scroll">
-            {/* ① Hull — choose a chassis first; image tiles, not a dropdown */}
-            <div className="tb-cat open">
-              <div className="tb-cat-head static">
+            {/* ① Hull — choose a chassis first; image tiles, not a dropdown. Collapsible. */}
+            <div className={`tb-cat ${hullOpen ? 'open' : ''}`}>
+              <button type="button" className="tb-cat-head" onClick={() => setHullOpen((v) => !v)}>
+                <span className="tb-cat-caret">▶</span>
                 <span className="tb-cat-dot" style={{ '--cat': CAT_COLOR.Chassis }} />
                 ① Choose a hull
                 <span className="tb-cat-count">{chassisShown.length}{matchTech && chassisShown.length < chassisList.length ? ` / ${chassisList.length}` : ''}</span>
-              </div>
-              <div className="tb-cat-body tb-chassis-grid">
-                {chassisShown.map((c) => (
-                  <button
-                    key={c.id}
-                    type="button"
-                    className={`tb-part chassis ${state.chassisId === c.id ? 'active' : ''}`}
-                    onClick={() => chooseChassis(c.id)}
-                    title={c.label ?? c.name}
-                  >
-                    <span className="tb-part-icon"><Thumb partId={c.id} /></span>
-                    <span className="tb-part-name">{c.label ?? c.name}</span>
-                    <span className="tb-part-size">{c.bounds[0]}×{c.bounds[2]}</span>
-                  </button>
-                ))}
-              </div>
+              </button>
+              {hullOpen && (
+                <div className="tb-cat-body tb-chassis-grid">
+                  {chassisShown.map((c) => (
+                    <button
+                      key={c.id}
+                      type="button"
+                      className={`tb-part chassis ${state.chassisId === c.id ? 'active' : ''}`}
+                      onClick={() => chooseChassis(c.id)}
+                      title={c.label ?? c.name}
+                    >
+                      <span className="tb-part-icon"><Thumb partId={c.id} /></span>
+                      <span className="tb-part-name">{c.label ?? c.name}</span>
+                      <span className="tb-part-size">{c.bounds[0]}×{c.bounds[2]}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
-            {/* ② Essentials — the parts a trampler needs to be valid, grouped by category */}
-            <div className="tb-cat open">
-              <div className="tb-cat-head static">
-                <span className="tb-cat-dot ess" />
-                ② Essentials <span className="tb-cat-sub">required</span>
-                <span className="tb-cat-count">{essCats.reduce((n, [, it]) => n + it.length, 0)}</span>
-              </div>
-              <div className="tb-cat-body">
-                {essCats.length === 0 && <div className="tb-hint-sm">No matches.</div>}
-                {essCats.map(([cat, items]) => (
-                  <div key={cat} className="tb-ess-group">
-                    <div className="tb-ess-label">
-                      <span className="tb-cat-dot" style={{ '--cat': CAT_COLOR[cat] ?? 'var(--primary)' }} />{cat}
+            {/* ② Essentials — the parts a trampler needs to be valid, grouped by category.
+                Collapsible (force-open while searching so matches still show). */}
+            {(() => {
+              const essShow = essOpen || !!q
+              return (
+                <div className={`tb-cat ${essShow ? 'open' : ''}`}>
+                  <button type="button" className="tb-cat-head" onClick={() => setEssOpen((v) => !v)}>
+                    <span className="tb-cat-caret">▶</span>
+                    <span className="tb-cat-dot ess" />
+                    ② Essentials <span className="tb-cat-sub">required</span>
+                    <span className="tb-cat-count">{essCats.reduce((n, [, it]) => n + it.length, 0)}</span>
+                  </button>
+                  {essShow && (
+                    <div className="tb-cat-body">
+                      {essCats.length === 0 && <div className="tb-hint-sm">No matches.</div>}
+                      {essCats.map(([cat, items]) => (
+                        <div key={cat} className="tb-ess-group">
+                          <div className="tb-ess-label">
+                            <span className="tb-cat-dot" style={{ '--cat': CAT_COLOR[cat] ?? 'var(--primary)' }} />{cat}
+                          </div>
+                          {items.map((p) => renderPart(p))}
+                        </div>
+                      ))}
                     </div>
-                    {items.map((p) => renderPart(p))}
-                  </div>
-                ))}
-              </div>
-            </div>
+                  )}
+                </div>
+              )
+            })()}
 
             {/* ③ Everything else — optional categories (collapsible) */}
             {cats.map(([cat, items]) => {
