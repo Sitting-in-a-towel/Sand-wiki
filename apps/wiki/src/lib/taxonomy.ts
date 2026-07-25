@@ -47,12 +47,15 @@ export const SECTIONS: Section[] = [
       { slug: "loot-containers", label: "Loot Containers" },
       { slug: "landmarks", label: "Landmarks" },
       { slug: "game-modes", label: "Game Modes" },
-      { slug: "npcs", label: "NPCs", wip: true },
+      // NPCs live under Environment as two real categories (kind:"environment").
+      { slug: "creatures", label: "Creatures" },
+      { slug: "enemy-tramplers", label: "Enemy Tramplers" },
     ],
   },
   { slug: "tramplers", label: "Tramplers", kind: "data", categories: tramplerCategories },
   { slug: "tech", label: "Tech Tree", kind: "link", categories: [] },
   { slug: "builder", label: "Builder", kind: "link", categories: [] },
+  { slug: "map", label: "3D Map", kind: "link", categories: [] },
   { slug: "gallery", label: "Gallery", kind: "link", categories: [] },
   {
     // Data hub: a dropdown of standalone tool pages (each category slug IS the route),
@@ -210,6 +213,9 @@ export const CATEGORY_COLORS: Record<string, string> = {
   landmarks: "#7aa6b0",
   "game-modes": "#b07aa0",
   npcs: "#9b8b73",
+  // enemy categories
+  creatures: "#c65f5f",
+  "enemy-tramplers": "#8b94a6",
   // trampler categories
   chassis: "#a6794f",
   reactors: "#d4a23f",

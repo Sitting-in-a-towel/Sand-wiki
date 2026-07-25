@@ -38,3 +38,14 @@ describe("classifyImages", () => {
     expect(r.needsExtraction.map((m) => m.slug)).not.toContain("a-location");
   });
 });
+
+describe("images: NPC (environment) icon exemption", () => {
+  it("counts null-icon NPCs under environment byDesign, not needsExtraction", () => {
+    const report = classifyImages(
+      [ent("upior", "environment", null)],
+      () => false,
+    );
+    expect(report.needsExtraction).toHaveLength(0);
+    expect(report.byDesign.environmentNoIcon).toBe(1);
+  });
+});

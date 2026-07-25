@@ -16,7 +16,7 @@
     "item_smallCannonAmmo_lowRecoil"
    ],
    "spreadIdleMax": 1.5,
-   "projectileVelocity": 150,
+   "projectileVelocity": 200,
    "penetrates": true,
    "source": "walker_autoMountedTurret_T1"
   },
@@ -36,7 +36,7 @@
     "item_smallCannonAmmo_lowRecoil"
    ],
    "spreadIdleMax": 1.0,
-   "projectileVelocity": 150,
+   "projectileVelocity": 200,
    "penetrates": true,
    "source": "walker_autoMountedTurret_T2"
   },
@@ -56,7 +56,7 @@
     "item_smallCannonAmmo_lowRecoil"
    ],
    "spreadIdleMax": 0.5,
-   "projectileVelocity": 150,
+   "projectileVelocity": 200,
    "penetrates": true,
    "source": "walker_autoMountedTurret_T3"
   },
@@ -76,7 +76,7 @@
     "item_smallCannonAmmo_lowRecoil"
    ],
    "spreadIdleMax": 0.5,
-   "projectileVelocity": 150,
+   "projectileVelocity": 200,
    "penetrates": true,
    "source": "walker_autoMountedTurret_T4_Accelerating"
   },
@@ -213,7 +213,7 @@
    "barrels": 1,
    "fireRate": 0.67,
    "fireInterval": 1.5,
-   "reloadSeconds": 2.5,
+   "reloadSeconds": 3,
    "clipSize": 1,
    "autoRefill": false,
    "ammoTypes": [

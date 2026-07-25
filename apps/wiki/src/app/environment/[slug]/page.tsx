@@ -6,8 +6,10 @@ import { lootEntryView } from "@/lib/loot";
 import { groupLootByTier, entityHref, type LinkRow } from "@/lib/entity-links";
 import { categoryLabel } from "@/lib/taxonomy";
 import { byRarityThenName } from "@/lib/rarity";
+import { enemyStatCells } from "@/lib/enemy-view";
 import { EntityDetail } from "@/components/EntityDetail";
 import { CategoryTag } from "@/components/CategoryTag";
+import { MapLink } from "@/components/MapLink";
 import { LootTable } from "@/components/LootTable";
 import { KeyLinksTable, type KeyLinkView } from "@/components/KeyLinksTable";
 import { UsedInTable } from "@/components/UsedInTable";
@@ -112,8 +114,15 @@ export default async function EnvEntityPage({ params }: { params: Params }) {
       ]}
       icon={{ name: entity.name, icon: entity.icon, decorative: true, categorySlug: entity.category }}
       title={entity.name}
-      badges={<CategoryTag slug={entity.category} />}
+      badges={
+        <>
+          <CategoryTag slug={entity.category} />
+          {entity.category === "landmarks" && <MapLink name={entity.name} />}
+        </>
+      }
       description={entity.description}
+      // NPC entities (creatures / enemy-tramplers) carry enemyStats → show per-variant HP.
+      stats={entity.enemyStats ? enemyStatCells(entity.enemyStats.variants) : undefined}
       disabled={entity.disabled}
       adminControls={
         admin ? (
@@ -121,7 +130,6 @@ export default async function EnvEntityPage({ params }: { params: Params }) {
         ) : undefined
       }
       tabs={tabs}
-      sourceUrl={entity.sourceUrl}
     />
   );
 }

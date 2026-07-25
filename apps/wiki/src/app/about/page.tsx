@@ -56,6 +56,17 @@ export default async function AboutPage() {
               internal identifiers, so they may differ from the in-game wording.
             </p>
           </div>
+
+          <div>
+            <h2 className="mb-2 font-display text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+              Credits &amp; thanks
+            </h2>
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              The interactive tools were built by the community:{" "}
+              <strong className="text-foreground">Sadpanda</strong> for the Trampler Builder, and{" "}
+              <strong className="text-foreground">DownloadPizza</strong> for the 3D Map. Thank you.
+            </p>
+          </div>
         </div>
       </section>
     </div>

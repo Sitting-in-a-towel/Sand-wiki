@@ -256,12 +256,18 @@ export async function listEntityPaths(): Promise<{ slug: string; kind: string }[
 
 export interface CrateDrop { crateSlug: string; crateName: string; tier: string; chance: string | null }
 
-/** Crates and landmarks (with tier) whose loot tables contain the given item slug. */
+// Environment sources whose loot backlinks onto an item page: crates, landmarks, and NPCs
+// (creatures / enemy-tramplers). Game-modes are excluded (no item loot). Keep this in sync
+// with the "always backlink data" rule — an env loot source not listed here is a broken backlink.
+const LOOT_SOURCE_CATEGORIES = new Set(["loot-containers", "landmarks", "creatures", "enemy-tramplers"]);
+
+/** Every environment source (crate, landmark, or NPC) whose loot contains the given item slug,
+ *  with the tier/group label + chance. Powers the item page's reverse "dropped by" view. */
 export async function getCratesContaining(itemSlug: string): Promise<CrateDrop[]> {
   return data.incomingLinks(itemSlug, ["loot"])
     .map((l) => ({ l, src: data.getEntity(l.sourceSlug)! }))
     .filter(({ src }) => src.kind === "environment"
-      && (src.category === "loot-containers" || src.category === "landmarks")
+      && LOOT_SOURCE_CATEGORIES.has(src.category)
       && !src.disabled)
     .sort((x, y) => x.src.name.localeCompare(y.src.name) || x.l.sortOrder - y.l.sortOrder)
     .map(({ l, src }) => ({

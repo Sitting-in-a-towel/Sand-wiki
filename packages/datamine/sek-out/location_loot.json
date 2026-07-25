@@ -1,0 +1,110 @@
+{
+ "meta": {
+  "source": "location_spawns.json",
+  "locations": 2
+ },
+ "locations": [
+  {
+   "slug": "dreadnaught",
+   "name": "Dreadnought",
+   "mint": false,
+   "category": "landmarks",
+   "description": null,
+   "loot": [
+    {
+     "slug": "rocket-launcher-ammo-armor-piercing",
+     "name": "Armor-Piercing Rocket",
+     "chance": 100.0,
+     "count": "1",
+     "tier": "Notable loot"
+    },
+    {
+     "slug": "artefact-crystal",
+     "name": "Crystal",
+     "chance": 100.0,
+     "count": "1",
+     "tier": "Notable loot"
+    },
+    {
+     "slug": "crystal-handles",
+     "name": "Raw Aurogen Crystal",
+     "chance": 100.0,
+     "count": "1",
+     "tier": "Notable loot"
+    },
+    {
+     "slug": "rocket-launcher",
+     "name": "RW1 Rocket Launcher",
+     "chance": 100.0,
+     "count": "1",
+     "tier": "Notable loot"
+    },
+    {
+     "slug": "game-packed-shotgun-turret-t4-double-barrel-container",
+     "name": "Experimental 2x70 mm Twin Shotgun Cannon Kit",
+     "chance": 33.3,
+     "count": "1",
+     "tier": "Notable loot"
+    },
+    {
+     "slug": "game-packed-auto-turret-t4-accelerating-container",
+     "name": "Experimental 40 mm Autocannon Kit",
+     "chance": 33.3,
+     "count": "1",
+     "tier": "Notable loot"
+    },
+    {
+     "slug": "game-packed-turret-t4-rail-gun-container",
+     "name": "Experimental 80 mm Railgun Kit",
+     "chance": 33.3,
+     "count": "1",
+     "tier": "Notable loot"
+    },
+    {
+     "slug": "wok-bomb",
+     "name": "E-Wok Bomb",
+     "chance": 9.1,
+     "count": "1",
+     "tier": "Notable loot"
+    },
+    {
+     "slug": "rocket-launcher-ammo-high-explosion",
+     "name": "High-Explosive Rocket",
+     "chance": null,
+     "count": "1",
+     "tier": "Notable loot"
+    }
+   ]
+  },
+  {
+   "slug": "ship-graveyard",
+   "name": "Ship Graveyard",
+   "mint": true,
+   "category": "landmarks",
+   "description": "The Ship Graveyard (the \"worm pit\") is an event-exclusive [[storm-dive]] finale. It only appears on 9-city maps, at about 1 in 3 — the [[dreadnaught]] takes the other 2 in 3. Like the Dreadnought, it holds experimental cannon kits.",
+   "loot": [
+    {
+     "slug": "game-packed-shotgun-turret-t4-double-barrel-container",
+     "name": "Experimental 2x70 mm Twin Shotgun Cannon Kit",
+     "chance": 3.0,
+     "count": "1",
+     "tier": "Notable loot"
+    },
+    {
+     "slug": "game-packed-auto-turret-t4-accelerating-container",
+     "name": "Experimental 40 mm Autocannon Kit",
+     "chance": 3.0,
+     "count": "1",
+     "tier": "Notable loot"
+    },
+    {
+     "slug": "game-packed-turret-t4-rail-gun-container",
+     "name": "Experimental 80 mm Railgun Kit",
+     "chance": 3.0,
+     "count": "1",
+     "tier": "Notable loot"
+    }
+   ]
+  }
+ ]
+}

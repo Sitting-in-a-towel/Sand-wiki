@@ -1,5 +1,110 @@
 [
   {
+    "slug": "game-key-island-door-black",
+    "name": "Black Key",
+    "kind": "item"
+  },
+  {
+    "slug": "game-key-island-door-blue",
+    "name": "Blue Key",
+    "kind": "item"
+  },
+  {
+    "slug": "game-key-island-door-fort",
+    "name": "Fort Storage Room Key",
+    "kind": "item"
+  },
+  {
+    "slug": "game-key-island-door-green",
+    "name": "Green Key",
+    "kind": "item"
+  },
+  {
+    "slug": "game-key-island-door-red",
+    "name": "Red Key",
+    "kind": "item"
+  },
+  {
+    "slug": "game-key-island-door-white",
+    "name": "White Key",
+    "kind": "item"
+  },
+  {
+    "slug": "game-key-locked-box",
+    "name": "Box Key",
+    "kind": "item"
+  },
+  {
+    "slug": "game-packed-auto-turret-t1-container",
+    "name": "Rusty 40 mm Autocannon Kit",
+    "kind": "item"
+  },
+  {
+    "slug": "game-packed-auto-turret-t2-container",
+    "name": "Worn 40 mm Autocannon Kit",
+    "kind": "item"
+  },
+  {
+    "slug": "game-packed-auto-turret-t3-container",
+    "name": "Pristine 40 mm Autocannon Kit",
+    "kind": "item"
+  },
+  {
+    "slug": "game-packed-auto-turret-t4-accelerating-container",
+    "name": "Experimental 40 mm Autocannon Kit",
+    "kind": "item"
+  },
+  {
+    "slug": "game-packed-shotgun-turret-t1-container",
+    "name": "Rusty 70 mm Shotgun Cannon Kit",
+    "kind": "item"
+  },
+  {
+    "slug": "game-packed-shotgun-turret-t2-container",
+    "name": "Worn 70 mm Shotgun Cannon Kit",
+    "kind": "item"
+  },
+  {
+    "slug": "game-packed-shotgun-turret-t3-container",
+    "name": "Pristine 70 mm Shotgun Cannon Kit",
+    "kind": "item"
+  },
+  {
+    "slug": "game-packed-shotgun-turret-t4-double-barrel-container",
+    "name": "Experimental 2x70 mm Twin Shotgun Cannon Kit",
+    "kind": "item"
+  },
+  {
+    "slug": "game-packed-turret-t1-container",
+    "name": "Rusty 80 mm Naval Cannon Kit",
+    "kind": "item"
+  },
+  {
+    "slug": "game-packed-turret-t2-container",
+    "name": "Worn 80 mm Naval Cannon Kit",
+    "kind": "item"
+  },
+  {
+    "slug": "game-packed-turret-t3-container",
+    "name": "Pristine 80 mm Naval Cannon Kit",
+    "kind": "item"
+  },
+  {
+    "slug": "game-packed-turret-t4-double-barrel-container",
+    "name": "Experimental 80mm Cannon Kit",
+    "kind": "item"
+  },
+  {
+    "slug": "game-packed-turret-t4-rail-gun-container",
+    "name": "Experimental 80 mm Railgun Kit",
+    "kind": "item"
+  },
+  {
+    "slug": "repeater-rifle-one-shot",
+    "name": "M1866/9 \"Einzel\" Breechloader",
+    "kind": "item"
+  },
+  {
     "slug": "shotgun-turret-ammo-interior-explosion",
     "name": "Interior Explosion 70 mm Shell",
     "kind": "item"

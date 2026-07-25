@@ -6,20 +6,24 @@
 import { readFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { loadBaseline } from "./baseline";
-import { loadSekItems, loadLocalization, loadContainerLoot } from "./sek";
+import { loadSekItems, loadLocalization, loadContainerLoot, loadEnemies, loadWorldSpawns, loadLockboxes, loadLocationLoot } from "./sek";
 import { reconcile } from "./reconcile";
 import { buildItemI18n } from "./i18n";
 import { mergeItems } from "./merge";
-import { applyIconOverrides, applyEntityOverrides, type EntityOverride } from "./items";
+import { applyIconOverrides, applyEntityOverrides, pruneIconlessItems, type EntityOverride } from "./items";
 import { loadCompartmentStats, mergeTrampler } from "./trampler";
 import { loadWeaponStats, loadTurretStats, mergeCombatStats } from "./combat-stats";
 import { loadRecipes, mergeRecipes } from "./recipes";
 import { enumerateItems } from "./enumerate";
 import { canonicalSekId } from "./variants";
 import { buildLootLinks, applyLoot, type LootOverrides } from "./loot";
+import { mergeEnemies, buildEnemyLootLinks } from "./enemies";
+import { mergeWorldSpawnEntity, buildWorldSpawnLinks } from "./world-spawns";
+import { mergeLockboxEntities, buildLockboxLinks, applyLockboxLinks } from "./lockbox";
+import { mergeLocationEntities, buildLocationLootLinks, applyLocationLoot } from "./location-loot";
 import { classifyImages } from "./images";
 import { diffEntities } from "./diff";
-import { validateEntities, writeArtifact, writeMissingReport, writeImagesReport, writeRecipesMissingReport } from "./emit";
+import { validateEntities, writeArtifact, writeMissingReport, writeImagesReport, writeRecipesMissingReport, reportDanglingRefs } from "./emit";
 
 const PUBLIC = resolve(import.meta.dirname, "../../../apps/wiki/public");
 
@@ -44,6 +48,10 @@ const baseline = loadBaseline();
 const sekItems = loadSekItems().filter((i) => !exclusions.has(i.id));
 const loc = loadLocalization();
 const containerLoot = loadContainerLoot();
+const enemies = loadEnemies();
+const worldSpawns = loadWorldSpawns();
+const lockboxes = loadLockboxes();
+const locationLoot = loadLocationLoot();
 
 // --- items: enumerate (SEK items ∪ localization registry) -> reconcile -> i18n -> merge ---
 const allItems = enumerateItems(loc, sekItems).filter((i) => !exclusions.has(i.id));
@@ -60,7 +68,14 @@ const mergeable = allItems.filter((it) => {
 const i18n = buildItemI18n(loc, new Map([...rec.bySekId].map(([id, hit]) => [id, hit.slug])));
 const merged = mergeItems(baseline.entities, mergeable, rec.bySekId, i18n);
 // Force corrected icons last (fixes stale/wrong paths in the source data).
-const entities = applyEntityOverrides(applyIconOverrides(merged.entities, iconMap), entityOverrides);
+const withOverrides = applyEntityOverrides(applyIconOverrides(merged.entities, iconMap), entityOverrides);
+// Item pages require an icon: an item with no shippable sprite is not available in-game
+// (internal notes/debug boxes/packed-turret containers, and not-yet-released items). Non-item
+// kinds (tech-node/environment/trampler-part) keep their by-design null icons. Applied after
+// icon-map so an override can rescue an item before the prune.
+const entities = pruneIconlessItems(withOverrides);
+const prunedCount = withOverrides.length - entities.length;
+console.log(`icon gate: dropped ${prunedCount} icon-less item page(s)`);
 // Genuine gaps only — drop the intentionally-hardcoded baseline-only items.
 const missing = merged.missing.filter((m) => !hardcodedItems.has(m.slug));
 const hardcodedKept = merged.missing.length - missing.length;
@@ -81,12 +96,36 @@ const withCombat = mergeCombatStats(withTrampler, loadWeaponStats(), loadTurretS
 const combatRefreshed = withCombat.filter((e, i) => e.itemStats !== withTrampler[i].itemStats).length;
 console.log(`combat stats: refreshed ${combatRefreshed} items`);
 
+// --- enemies: add/refresh NPC entities (Upior, Ironclad) with enemyStats ---
+const withEnemies = enemies.length ? mergeEnemies(withCombat, enemies) : withCombat;
+console.log(enemies.length
+  ? `enemies: merged ${enemies.length} NPC entit${enemies.length === 1 ? "y" : "ies"}`
+  : "enemies: source absent (enemies.json) — none merged");
+
+// --- world spawns: add the synthetic "World / Ground Loot" source entity ---
+const withWorld = mergeWorldSpawnEntity(withEnemies, worldSpawns);
+console.log(worldSpawns
+  ? `world spawns: merged "World / Ground Loot" source (${worldSpawns.loot.length} loose items)`
+  : "world spawns: source absent (world_spawns.json) — none merged");
+
+// --- locked crates: mint Military/Valuables/Utility Box container entities ---
+const withLockboxes = mergeLockboxEntities(withWorld, lockboxes);
+console.log(lockboxes
+  ? `lockboxes: merged ${lockboxes.crates.length} locked-crate container(s)`
+  : "lockboxes: source absent (lockbox_loot.json) — none merged");
+
+// --- per-location notable loot: mint any new location entities (e.g. Ship Graveyard) ---
+const withLocations = mergeLocationEntities(withLockboxes, locationLoot);
+console.log(locationLoot
+  ? `location loot: ${locationLoot.locations.length} location(s) with notable loot`
+  : "location loot: source absent (location_loot.json) — none merged");
+
 // --- recipes: merge crafting recipes over baseline (keep baseline-only + report) ---
 const recipeMerge = mergeRecipes(baseline.recipes, loadRecipes(), rec.bySekId);
 console.log(`recipes: ${recipeMerge.recipes.length} total (${recipeMerge.missing.length} baseline-only kept)`);
 
 // --- loot: deep-derive container loot links, then drop any pointing at an unknown slug ---
-const knownSlugs = new Set(withCombat.map((e) => e.slug));
+const knownSlugs = new Set(withLocations.map((e) => e.slug));
 const loot = buildLootLinks(containerLoot, lootOverrides);
 const dangling = loot.links.filter((l) => l.targetSlug && !knownSlugs.has(l.targetSlug));
 if (dangling.length) {
@@ -94,10 +133,45 @@ if (dangling.length) {
     [...new Set(dangling.map((l) => l.targetSlug))].slice(0, 20).join(", "));
 }
 loot.links = loot.links.filter((l) => !l.targetSlug || knownSlugs.has(l.targetSlug));
-const links = applyLoot(baseline.links, loot);
+const enemyLoot = buildEnemyLootLinks(enemies);
+const enemyDangling = enemyLoot.links.filter((l) => l.targetSlug && !knownSlugs.has(l.targetSlug));
+if (enemyDangling.length) {
+  console.warn(`enemy loot: dropping ${enemyDangling.length} link(s) to unknown item slugs:`,
+    [...new Set(enemyDangling.map((l) => l.targetSlug))].slice(0, 20).join(", "));
+}
+enemyLoot.links = enemyLoot.links.filter((l) => !l.targetSlug || knownSlugs.has(l.targetSlug));
+const worldLoot = buildWorldSpawnLinks(worldSpawns);
+const worldDangling = worldLoot.links.filter((l) => l.targetSlug && !knownSlugs.has(l.targetSlug));
+if (worldDangling.length) {
+  console.warn(`world loot: dropping ${worldDangling.length} link(s) to unknown item slugs:`,
+    [...new Set(worldDangling.map((l) => l.targetSlug))].slice(0, 20).join(", "));
+}
+worldLoot.links = worldLoot.links.filter((l) => !l.targetSlug || knownSlugs.has(l.targetSlug));
+const lockboxLinks = buildLockboxLinks(lockboxes);
+const lockboxDangling = lockboxLinks.links.filter((l) => l.targetSlug && !knownSlugs.has(l.targetSlug));
+if (lockboxDangling.length) {
+  console.warn(`lockbox links: dropping ${lockboxDangling.length} link(s) to unknown slugs:`,
+    [...new Set(lockboxDangling.map((l) => l.targetSlug))].slice(0, 20).join(", "));
+}
+lockboxLinks.links = lockboxLinks.links.filter((l) => !l.targetSlug || knownSlugs.has(l.targetSlug));
+const locationLootLinks = buildLocationLootLinks(locationLoot);
+const locDangling = locationLootLinks.links.filter((l) => l.targetSlug && !knownSlugs.has(l.targetSlug));
+if (locDangling.length) {
+  console.warn(`location loot: dropping ${locDangling.length} link(s) to unknown item slugs:`,
+    [...new Set(locDangling.map((l) => l.targetSlug))].slice(0, 20).join(", "));
+}
+locationLootLinks.links = locationLootLinks.links.filter((l) => !l.targetSlug || knownSlugs.has(l.targetSlug));
+const links = applyLocationLoot(
+  applyLockboxLinks(applyLoot(applyLoot(applyLoot(baseline.links, loot), enemyLoot), worldLoot), lockboxLinks),
+  locationLootLinks,
+);
+console.log(`enemy loot: ${enemyLoot.links.length} link(s) across ${enemyLoot.covered.size} enemies`);
+console.log(`lockboxes: ${lockboxLinks.links.length} link(s) (loot + requires-key) across ${lockboxLinks.covered.size} crates`);
+console.log(`location loot: ${locationLootLinks.links.length} notable link(s) across ${locationLootLinks.covered.size} locations`);
+console.log(`world loot: ${worldLoot.links.length} loose-item link(s)`);
 
 // --- diff + guards ---
-const diff = diffEntities(baseline.entities, withCombat);
+const diff = diffEntities(baseline.entities, withLocations);
 console.log(`entities ${diff.total.prev} -> ${diff.total.next} | +${diff.added.length} added, -${diff.removed.length} removed`);
 console.log(`reconcile: ${[...rec.bySekId.values()].filter((h) => h.status === "matched").length} matched, ` +
   `${[...rec.bySekId.values()].filter((h) => h.status === "new").length} new, ` +
@@ -112,15 +186,21 @@ if (diff.removed.length > 0 && !allowSlugChanges) {
   process.exit(1);
 }
 
-validateEntities(withCombat);
+validateEntities(withLocations);
+
+const danglingRefs = reportDanglingRefs(withLocations, links, recipeMerge.recipes);
+if (danglingRefs.length) {
+  console.warn(`referential integrity: ${danglingRefs.length} dangling reference(s) to missing entities:`,
+    danglingRefs.slice(0, 20).join(", ") + (danglingRefs.length > 20 ? " …" : ""));
+}
 
 // --- images: report entities whose icon is null or whose file is missing on disk ---
-const images = classifyImages(withCombat, (icon) => existsSync(resolve(PUBLIC, `.${icon}`)));
+const images = classifyImages(withLocations, (icon) => existsSync(resolve(PUBLIC, `.${icon}`)));
 console.log(`missing images: ${images.needsExtraction.length} need extraction ` +
-  `(by design: ${images.byDesign.techNodeNoIcon} tech-nodes, ${images.byDesign.environmentNoIcon} locations)`);
+  `(by design: ${images.byDesign.techNodeNoIcon} tech-nodes, ${images.byDesign.environmentNoIcon} locations/NPCs)`);
 
 // recipes + non-loot links + parts/tech/locations entities pass through from baseline.
-writeArtifact(withCombat, recipeMerge.recipes, links);
+writeArtifact(withLocations, recipeMerge.recipes, links);
 writeMissingReport(missing);
 writeRecipesMissingReport(recipeMerge.missing);
 writeImagesReport(images);

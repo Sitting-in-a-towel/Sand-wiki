@@ -1,5 +1,5 @@
 // Typed loaders for the committed sek-out datasets (the datamine inputs).
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 
 const SEK = resolve(import.meta.dirname, "../sek-out");
@@ -34,4 +34,41 @@ export function loadContainerLoot(dir = SEK): ContainerLoot {
   // build_container_loot.py emits a { meta, containers } envelope; tolerate a bare map too.
   const raw = read<Record<string, unknown>>("container_loot.json", dir);
   return (raw.containers ?? raw) as ContainerLoot;
+}
+
+// --- enemies (NPC entities + variant HP + combined loot; produced by build_enemies.py) ---
+import type { EnemyData } from "./enemies";
+
+export function loadEnemies(dir = SEK): EnemyData[] {
+  const p = resolve(dir, "enemies.json");
+  if (!existsSync(p)) return [];  // Stage A hasn't produced it yet -> no-op in the transform
+  const raw = JSON.parse(readFileSync(p, "utf-8")) as { enemies?: EnemyData[] } | EnemyData[];
+  return (Array.isArray(raw) ? raw : raw.enemies ?? []);
+}
+
+// --- world/ground loose-item spawns (the "World / Ground Loot" source; build_world_spawns.py) ---
+import type { WorldSpawnData } from "./world-spawns";
+
+export function loadWorldSpawns(dir = SEK): WorldSpawnData | null {
+  const p = resolve(dir, "world_spawns.json");
+  if (!existsSync(p)) return null;  // Stage A hasn't produced it yet -> no-op
+  return JSON.parse(readFileSync(p, "utf-8")) as WorldSpawnData;
+}
+
+// --- locked crates (Military/Valuables/Utility Box; build_lockbox_loot.py) ---
+import type { LockboxData } from "./lockbox";
+
+export function loadLockboxes(dir = SEK): LockboxData | null {
+  const p = resolve(dir, "lockbox_loot.json");
+  if (!existsSync(p)) return null;  // Stage A hasn't produced it yet -> no-op
+  return JSON.parse(readFileSync(p, "utf-8")) as LockboxData;
+}
+
+// --- per-location notable loot (Dreadnought experimental cannons, etc.; build_location_loot.py) ---
+import type { LocationLootData } from "./location-loot";
+
+export function loadLocationLoot(dir = SEK): LocationLootData | null {
+  const p = resolve(dir, "location_loot.json");
+  if (!existsSync(p)) return null;  // Stage A hasn't produced it yet -> no-op
+  return JSON.parse(readFileSync(p, "utf-8")) as LocationLootData;
 }

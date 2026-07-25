@@ -39,25 +39,29 @@ function loadIndex(): Promise<SearchIndex> {
 interface Flat { kind: "category" | "item" | "place"; slug: string; label: string; category: string; icon?: string | null; rarity?: string | null }
 interface Group { header: string; options: Flat[] }
 
+const placeGroup = (s: Suggestions, header: string, category: string): Group | null => {
+  const rows = s.places.filter((p) => p.category === category);
+  return rows.length
+    ? { header, options: rows.map((p) => ({ kind: "place", slug: p.slug, label: p.name, category: p.category })) }
+    : null;
+};
+
 /** Ordered dropdown groups, each included only when it has matches:
- *  Categories → Items → Loot Containers → Landmarks. */
+ *  Categories → Items → Loot Containers → Landmarks → Creatures → Enemy Tramplers.
+ *  All place kinds (containers, landmarks, NPCs) live under /environment. */
 function buildGroups(s: Suggestions): Group[] {
-  const groups: Group[] = [];
+  const groups: (Group | null)[] = [];
   if (s.categories.length) {
     groups.push({ header: "Categories", options: s.categories.map((c) => ({ kind: "category", slug: c.slug, label: c.label, category: c.slug })) });
   }
   if (s.items.length) {
     groups.push({ header: "Items", options: s.items.map((i) => ({ kind: "item", slug: i.slug, label: i.name, category: i.category, icon: i.icon, rarity: i.rarity })) });
   }
-  const loot = s.places.filter((p) => p.category === "loot-containers");
-  if (loot.length) {
-    groups.push({ header: "Loot Containers", options: loot.map((p) => ({ kind: "place", slug: p.slug, label: p.name, category: p.category })) });
-  }
-  const land = s.places.filter((p) => p.category === "landmarks");
-  if (land.length) {
-    groups.push({ header: "Landmarks", options: land.map((p) => ({ kind: "place", slug: p.slug, label: p.name, category: p.category })) });
-  }
-  return groups;
+  groups.push(placeGroup(s, "Loot Containers", "loot-containers"));
+  groups.push(placeGroup(s, "Landmarks", "landmarks"));
+  groups.push(placeGroup(s, "Creatures", "creatures"));
+  groups.push(placeGroup(s, "Enemy Tramplers", "enemy-tramplers"));
+  return groups.filter((g): g is Group => g !== null);
 }
 
 export function SearchBox({ variant }: { variant: "navbar" | "hero" }) {
@@ -97,7 +101,7 @@ export function SearchBox({ variant }: { variant: "navbar" | "hero" }) {
     setActive(-1);
     setQuery("");
     if (f.kind === "category") router.push(`/items?category=${f.slug}`);
-    else if (f.kind === "place") router.push(`/environment/${f.slug}`);
+    else if (f.kind === "place") router.push(`/environment/${f.slug}`); // containers, landmarks, NPCs
     else router.push(`/items/${f.slug}`);
   }
 

@@ -57,6 +57,10 @@ docker-compose.override.yml
 # anchored so it only ignores apps/wiki/uploads/, not src/app/api/uploads/ route source
 /uploads/
 
+# /map 3D viewer: baked location meshes (~500MB) live off-repo (Vercel Blob).
+# The tiny manifest.json/spawns.json fixtures stay committed; the big meshes never do.
+/public/map/*.glb.gz
+
 # datamine loot chain: game files + intermediate extracts are large/local-only
 /datamine/gamefiles/
 /datamine/extracted/*

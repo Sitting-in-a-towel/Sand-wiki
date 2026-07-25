@@ -4,6 +4,7 @@ import {
   GiAmmoBox, GiCardboardBox, GiOpenChest, GiCastle, GiGamepad, GiPerson,
   GiTank, GiNuclearPlant, GiGears, GiHelmet, GiSteeringWheel,
   GiCargoCrate, GiCannon, GiAnvil, GiCog,
+  GiDeathSkull, GiWalkingTurret,
 } from "react-icons/gi";
 import { BsTools } from "react-icons/bs";
 
@@ -32,6 +33,9 @@ const ICONS: Record<string, IconType> = {
   turrets: GiCannon,
   stations: GiAnvil,
   structure: GiCog,
+  // enemy categories
+  creatures: GiDeathSkull,
+  "enemy-tramplers": GiWalkingTurret,
 };
 
 export function CategoryIcon({ slug, className }: { slug: string; className?: string }) {

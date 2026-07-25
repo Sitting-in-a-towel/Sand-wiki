@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { sekItemPatch, newItemEntity, applyIconOverrides, applyEntityOverrides } from "./items";
+import { sekItemPatch, newItemEntity, applyIconOverrides, applyEntityOverrides, pruneIconlessItems } from "./items";
 import type { SekItem } from "./sek";
 import type { Entity } from "@sandlabs/data";
 
@@ -76,5 +76,42 @@ describe("items transform", () => {
     expect(out.find((x) => x.slug === "box-black")!.name).toBe("Box with Radio Beacon (Black)");
     expect(out.find((x) => x.slug === "box-black")!.disabled).toBe(false); // disabled untouched
     expect(out.find((x) => x.slug === "other")!.name).toBe("Other"); // unmapped -> untouched
+  });
+
+  it("descriptionAppend is idempotent/self-healing (never stacks up across re-runs)", () => {
+    const ent = (description: string | null): Entity => ({
+      id: "x", slug: "x", kind: "environment", name: "X", description, category: "landmarks",
+      rarity: null, icon: null, imageAlt: null, derivedName: null, sourceUrl: null,
+      disabled: false, itemStats: null, tramplerStats: null, techNodeStats: null,
+    });
+    const ov = { x: { descriptionAppend: "Finale note." } };
+    const first = applyEntityOverrides([ent("Intro.")], ov)[0].description!;
+    expect(first).toBe("Intro.\n\nFinale note.");
+    // Feeding the already-appended description back in (baseline = previous artifact) must NOT stack.
+    const second = applyEntityOverrides([ent(first)], ov)[0].description!;
+    expect(second).toBe("Intro.\n\nFinale note.");
+    expect(second.split("Finale note.").length - 1).toBe(1);
+    // Heals an already-duplicated baseline down to a single copy.
+    const healed = applyEntityOverrides([ent("Intro.\n\nFinale note.\n\nFinale note.")], ov)[0].description!;
+    expect(healed.split("Finale note.").length - 1).toBe(1);
+  });
+
+  it("pruneIconlessItems drops only null-icon item entities, keeps everything else", () => {
+    const ent = (slug: string, kind: Entity["kind"], icon: string | null): Entity => ({
+      id: slug, slug, kind, name: slug, description: null, category: "misc",
+      rarity: null, icon, imageAlt: null, derivedName: null, sourceUrl: null,
+      disabled: false, itemStats: null, tramplerStats: null, techNodeStats: null,
+    });
+    const out = pruneIconlessItems([
+      ent("note", "item", null),              // dropped: item, no icon
+      ent("box", "item", null),               // dropped: item, no icon
+      ent("iron-ingot", "item", "/icons/iron.png"), // kept: item with icon
+      ent("captain-module", "trampler-part", null), // kept: part, null by design
+      ent("tier-1-armor", "tech-node", null),       // kept: tech-node, null by design
+      ent("scrapyard", "environment", null),        // kept: environment, null by design
+    ]);
+    expect(out.map((e) => e.slug)).toEqual([
+      "iron-ingot", "captain-module", "tier-1-armor", "scrapyard",
+    ]);
   });
 });

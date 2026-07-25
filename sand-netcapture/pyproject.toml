@@ -1,0 +1,22 @@
+[project]
+name = "sand-netcapture"
+version = "0.1.0"
+description = "Passively captures the SAND game client's PlayFab/master-server responses and transforms them for the wiki."
+requires-python = ">=3.12"
+dependencies = [
+    "mitmproxy==11.0.2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==8.3.4"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

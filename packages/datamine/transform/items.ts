@@ -32,17 +32,36 @@ export function applyIconOverrides(entities: Entity[], iconMap: Record<string, s
 /** Curated, display-level entity field overrides keyed by slug, for fixes the datamine can't
  *  express: hide a redundant duplicate (disabled) or disambiguate identical names. Only the
  *  whitelisted fields below are overridable; applied after the merge so they always win. */
-export interface EntityOverride { name?: string; disabled?: boolean; category?: string }
+export interface EntityOverride {
+  name?: string;
+  disabled?: boolean;
+  category?: string;
+  /** Replace the description outright. */
+  description?: string;
+  /** Append this to the existing description (curated notes the wiki import lacks), as a new
+   *  paragraph. Ignored when `description` is also set. */
+  descriptionAppend?: string;
+}
 
 export function applyEntityOverrides(entities: Entity[], overrides: Record<string, EntityOverride>): Entity[] {
   return entities.map((e) => {
     const o = overrides[e.slug];
     if (!o) return e;
+    let description = e.description;
+    if (o.description !== undefined) description = o.description;
+    else if (o.descriptionAppend) {
+      // Idempotent + self-healing: strip any existing copies of the appended block first (the
+      // transform baseline is the previous artifact, so a naive append would stack up each run),
+      // then append exactly one.
+      const base = (e.description ?? "").split(o.descriptionAppend).join("").replace(/\n{3,}/g, "\n\n").trim();
+      description = base ? `${base}\n\n${o.descriptionAppend}` : o.descriptionAppend;
+    }
     return {
       ...e,
       ...(o.name !== undefined ? { name: o.name } : {}),
       ...(o.disabled !== undefined ? { disabled: o.disabled } : {}),
       ...(o.category !== undefined ? { category: o.category } : {}),
+      description,
     };
   });
 }
@@ -70,4 +89,17 @@ export function newItemEntity(slug: string, it: SekItem): Entity {
     icon: it.icon, imageAlt: null, derivedName: null, sourceUrl: null, disabled: false,
     itemStats: null, tramplerStats: null, techNodeStats: null,
   };
+}
+
+/** Drop item-kind entities that have no icon. Item icons come from sprite-match against
+ *  shipped game art, so a null icon means the item has no in-game sprite yet — i.e. it is
+ *  not released / not player-facing (internal notes, debug/test boxes, packed-turret
+ *  containers, and genuinely-unreleased items). Scoped strictly to kind "item":
+ *  tech-node / environment / trampler-part legitimately have null icons and are kept.
+ *  Because the transform baseline is the previous artifact, this both evicts already-shipped
+ *  no-icon pages and blocks new ones; an item reappears automatically once it ships with a
+ *  real icon. To rescue a released item that lacks a sprite, add it to overrides/icon-map.json
+ *  (applied before this prune). */
+export function pruneIconlessItems(entities: Entity[]): Entity[] {
+  return entities.filter((e) => e.kind !== "item" || !!e.icon);
 }

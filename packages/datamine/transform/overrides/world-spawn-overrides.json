@@ -1,0 +1,24 @@
+{
+ "_doc": "World/ground loose-spawn item resolution for build_world_spawns.py. itemSlugAliases maps world-prop (game_*) blueprint ids to their catalog item id/slug; excludeBlueprints force-drops blueprints that resolve to an item but are NOT player-collectible loose loot (hazards, spawners, test/contract). Blueprints that don't resolve to a real item page are skipped automatically (per the 'items that map to item pages' scope).",
+ "source": { "id": "world-ground-loot", "slug": "world-ground-loot", "name": "World / Ground Loot", "category": "loot-containers", "icon": null },
+ "itemSlugAliases": {
+  "game_coinCrownPile_10": "coin-crown",
+  "game_coinCrownPile_25": "coin-crown",
+  "game_coinCrown": "coin-crown",
+  "game_ValuablePiles01_mobDrop": "small-valuables",
+  "item_alloySteel": "resource-alloy-steel",
+  "item_weirdCoral": "resource-weird-coral",
+  "item_repairKit": "repair-kit",
+  "game_cannedFish": "canned-fish",
+  "item_rifleMusketClip": "repeater-rifle-quick-reload"
+ },
+ "excludeBlueprints": [
+  "game_treasureShovel",
+  "game_navalMine",
+  "game_explosiveBarrel",
+  "game_TestContract",
+  "game_contract_PawnShop",
+  "game_itemSpawnerIslandKeyFort",
+  "game_stationaryMedKit"
+ ]
+}

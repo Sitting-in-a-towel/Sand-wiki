@@ -1,5 +1,8 @@
 [
   {
+    "slug": "artefact-crystal"
+  },
+  {
     "slug": "loc-kaiserplatz-energy-bar"
   },
   {
@@ -25,5 +28,8 @@
   },
   {
     "slug": "loc-strudel-game-packed-shotgun-turret-t2-container"
+  },
+  {
+    "slug": "old-jacket"
   }
 ]

@@ -77,11 +77,14 @@ for c in db['compartments']:
     m = re.match(r'comp(?P<cat>[A-Za-z]+?)_', pid)
     category = (m.group('cat') if m else None) or o.get('category') or 'Other'
 
-    loc = LOC_COMP.get(f'walker_{pid}', {})
+    # localization keys compartments by full epb id (walker_<pid>_epb) and nests
+    # per-locale strings under `locales.en`; tolerate the legacy flat/no-suffix shape.
+    loc = LOC_COMP.get(f'walker_{pid}_epb') or LOC_COMP.get(f'walker_{pid}') or {}
+    loc_en = loc.get('locales', {}).get('en', loc)
     entry = {
         'id': pid,
-        'name': loc.get('name') or o.get('name') or prettify(pid),
-        'desc': loc.get('desc'),
+        'name': loc_en.get('name') or o.get('name') or prettify(pid),
+        'desc': loc_en.get('desc'),
         'category': category,
         'groups': c['group'],
         'enabled': c['enabled'],

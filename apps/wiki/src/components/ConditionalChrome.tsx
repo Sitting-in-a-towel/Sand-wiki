@@ -17,7 +17,9 @@ export function ConditionalChrome({
     pathname === "/builder" ||
     pathname.startsWith("/builder/") ||
     pathname === "/gallery" ||
-    pathname.startsWith("/gallery/");
+    pathname.startsWith("/gallery/") ||
+    pathname === "/map" ||
+    pathname.startsWith("/map/");
   if (fullBleed) return <>{children}</>;
   return (
     <>

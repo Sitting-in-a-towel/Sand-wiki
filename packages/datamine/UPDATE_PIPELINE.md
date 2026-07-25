@@ -17,6 +17,8 @@ python scripts/extract_icons.py
 python scripts/extract_loot_spawners.py
 python scripts/extract_loot_tables.py            # -> extracted/json/loottables_{voyage,storm}.json (Odin configs — see loot note)
 python scripts/build_loot_sources.py
+python scripts/extract_enemy_stats.py            # -> extracted/json/enemy_stats.json (Odin-decoded mob_* EPBs — see enemy note)
+python scripts/build_enemies.py
 python scripts/scan_location_prefabs.py
 python scripts/build_location_contents.py
 python scripts/extract_compartments_db.py        # -> extracted/json/compartments_database.json (INSPECT for stats — see note)
@@ -59,6 +61,19 @@ python scripts/build_container_loot.py
 > additionally drops loc-only ids that don't match a baseline entity (localization enriches, never
 > mints new wiki pages); genuinely-new items come from the curated item_defs/items.json.
 
+> **Enemy stats (datamine):** `extract_enemy_stats.py` Odin-decodes HP / niceName / type off the
+> allow-listed `mob_ghoul*` / `mob_ironclad_*` EPBs in `epb_assets_all.bundle` →
+> `extracted/json/enemy_stats.json` (a gitignored Stage-A intermediate, like `entity_loot.json`).
+> If an HP comes out null, inspect the printed `components` list and adjust `find_hp` (field/component
+> names were recovered from `global-metadata.dat`, not a code dump).
+>
+> `build_enemies.py` joins `enemy_stats.json` + `sek-out/loot_sources.json` +
+> `transform/overrides/enemy-overrides.json`, resolving drop items to wiki slugs against
+> `apps/wiki/prisma/data.json` (the internal id↔slug snapshot; the same source `build_container_loot.py`
+> uses — NOT generated/entities.json, whose ids are DB CUIDs) → `sek-out/enemies.json` (committed).
+> Loot-row display names are enriched from the shipped `packages/data/generated/entities.json`. Add
+> unresolved item ids to `enemy-overrides.json` → `itemSlugAliases`.
+
 > **Trampler stats (datamine):** `extract_compartment_stats.py` reads the `walker_*_epb` prefabs
 > in `epb_assets_all.bundle`. Each prefab MonoBehaviour holds an Odin-serialized Entitas component
 > list (`serializationData.SerializedBytes`, decoded via `odin_parser.py`). It writes
@@ -94,6 +109,12 @@ python scripts/export_part_meshes_v3.py      # -> apps/wiki/public/meshes + pack
 npx tsx packages/datamine/transform/run.ts        # -> packages/data/generated/*.json + diff report
 ```
 Review the diff (especially slug changes), then commit the regenerated artifact + art.
+
+> **Enemy entities (transform):** The transform merges `sek-out/enemies.json` into `kind:"enemy"`
+> entities (`transform/enemies.ts` → `mergeEnemies`), emitting `role:"loot"` links from each enemy
+> (Upior, Ironclad). Enemies are additions-only, so the first landing needs NO `--allow-slug-changes`.
+> Null enemy icons are by-design (exempt from the icon gate and the missing-images report, like
+> tech-nodes/locations).
 
 ## 4b. (OPTIONAL, DISABLED) Research-tree WebSocket capture
 The tech tree (node edges, unlock costs, tiers, faction assignment) is **server-side** — it is

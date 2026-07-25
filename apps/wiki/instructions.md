@@ -15,6 +15,18 @@ bottom is yours to keep specifying.
   locally. (Committing/pushing still happens only when the maintainer asks; when it does, it's to a
   branch + PR, never straight to `master`.)
 
+## Data linking (hard rule)
+
+- **Always cross-link related data in BOTH directions.** Whenever a relationship exists between
+  two entities, it must be reachable from *both* pages — never one-way. A drop must show on the
+  source's page (what it drops) **and** on the dropped item's page ("dropped by …"); a recipe
+  input must show on the workbench/recipe **and** on the ingredient item's page ("used in"); a
+  tech unlock must show on the node **and** on the unlocked entity; a key must show on the lock
+  **and** on the key item. The data layer models links as directed `EntityLink` rows, so the
+  reverse view is a query (`incomingLinks`) + a rendered section — if you add a new link role or a
+  new kind of source (e.g. NPCs as loot sources), you MUST also add/extend the reverse-side query
+  and UI so it backlinks. A relationship that only renders on one side is an incomplete feature.
+
 ## Overview
 
 Next.js 16 (App Router) + React 19 + Prisma 6 + Neon Postgres + Tailwind v4 + **shadcn/ui**.
@@ -65,7 +77,9 @@ brand wordmark: Black Ops One. Accessibility is a hard gate — axe must pass (`
   - `categoryForItem(type, name, slug)` maps the scraper's game `type` → category at seed time:
     weapon types with a `\d+\s?mm` name → **artillery**; per-slug overrides in `CATEGORY_OVERRIDES`
     (e.g. untyped M1866 → weapons, MedKit → medical); `ENERGY` → tools.
-- **Environment categories**: loot-containers, landmarks, game-modes, npcs (npcs has no source yet).
+- **Environment categories**: loot-containers, landmarks, game-modes, **creatures**, **enemy-tramplers**
+  (the last two are datamined NPCs — Upior/Ironclad — modelled as `kind:"environment"` with an
+  `enemyStats` HP block; the old single WIP `npcs` slot was replaced by these two).
 - **Rarity** (`src/lib/rarity.ts`): Common, Uncommon, Rare, Noteworthy, Remarkable, Experimental
   (tiers 1–6) → fixed game-palette colors (Rare=blue tier 3, Noteworthy=purple tier 4, matching
   the in-game palette). Rarity tints the item icon background + drives a filter.
@@ -321,7 +335,8 @@ the React UI mirrors — but where they disagree with these files, **globals.css
 
 _Add desired features, content, and rules below — this section is owned by the maintainer._
 
-- [ ] NPCs: no community-wiki source yet — decide on a data source or author manually.
+- [x] NPCs: datamined from the game files (Upior, Ironclad) as `environment` creatures/
+      enemy-tramplers with HP + loot; live under the Environment section.
 - [ ] Landmarks/Game Modes: most wiki pages are empty stubs — consider authoring descriptions
       locally instead of relying on the wiki.
 - [ ] Weapon/artillery pages: render the `StatGrid` "Ammo" stat as an icon + tooltip

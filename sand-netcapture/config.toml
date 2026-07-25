@@ -1,0 +1,32 @@
+# Local proxy port that mitmdump listens on and the system proxy points at.
+proxy_port = 8080
+
+# Only responses whose host contains one of these substrings are recorded.
+# Fill these in from the Phase-0 probe (README). Examples are placeholders to be
+# confirmed against a real session.
+host_allowlist = [
+    "playfabapi.com",
+    "playfab.com",
+]
+
+# Endpoint keys we expect to see in a complete session, used for the coverage checklist.
+# Derived from the request URL / PlayFab function name (see capture_core.derive_endpoint_key).
+expected_endpoints = [
+    "Login",
+    "GetCharacters",
+    "GetResearchTree",
+    "GetCompartmentDefinitions",
+    "GetStorage",
+    "GetExpedition",
+    "GetShopItems",
+]
+
+# Where raw captures and the capture index are written.
+captures_dir = "out/captures"
+
+# --- research-tree transform ---
+# Maps the server's integer Fraction (0/1/2) to the wiki faction slug, by index.
+# VERIFY against a real capture before trusting: order is an assumption.
+fraction_factions = ["godlewski", "kaiser", "landwehr"]
+# The server Tier is 0-based; the wiki uses 1-based tiers.
+tier_offset = 1

@@ -13,6 +13,12 @@ const places: IndexPlace[] = [
   { slug: "dreadnaught", name: "Dreadnaught", category: "landmarks" },
 ];
 
+// NPCs (creatures / enemy-tramplers) are environment "places" now.
+const npcs: IndexPlace[] = [
+  { slug: "ironclad", name: "Ironclad", category: "enemy-tramplers" },
+  { slug: "upior", name: "Upiór", category: "creatures" },
+];
+
 describe("searchSuggestions", () => {
   it("returns nothing for an empty/whitespace query", () => {
     expect(searchSuggestions("", index)).toEqual({ categories: [], items: [], places: [] });
@@ -74,5 +80,11 @@ describe("searchSuggestions", () => {
       slug: `crate-${n}`, name: `Crate ${n}`, category: "loot-containers",
     }));
     expect(searchSuggestions("crate", index, many).places).toHaveLength(6);
+  });
+
+  it("matches NPCs (as places) by name, tagged by their npc category", () => {
+    const r = searchSuggestions("iron", index, npcs);
+    const iron = r.places.find((p) => p.slug === "ironclad");
+    expect(iron?.category).toBe("enemy-tramplers");
   });
 });

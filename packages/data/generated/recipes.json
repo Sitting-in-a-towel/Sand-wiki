@@ -855,5 +855,47 @@
         "amount": 150
       }
     ]
+  },
+  {
+    "slug": "old-jacket-2",
+    "workbench": "Utility",
+    "tier": 1,
+    "craftTimeSeconds": 5,
+    "locationSlug": null,
+    "inputs": [
+      {
+        "itemSlug": "resource-fabric",
+        "amount": 2
+      },
+      {
+        "itemSlug": "resource-threads",
+        "amount": 10
+      }
+    ],
+    "outputs": [
+      {
+        "itemSlug": "old-jacket-2",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "slug": "artefactcrystal",
+    "workbench": "Utility",
+    "tier": 1,
+    "craftTimeSeconds": 5,
+    "locationSlug": null,
+    "inputs": [
+      {
+        "itemSlug": "crystal-handles",
+        "amount": 1
+      }
+    ],
+    "outputs": [
+      {
+        "itemSlug": "artefactcrystal",
+        "amount": 4
+      }
+    ]
   }
 ]

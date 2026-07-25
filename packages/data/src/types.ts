@@ -49,6 +49,14 @@ export interface TechNodeStats {
   sortOrder: number | null;
 }
 
+export interface EnemyStats {
+  /** creature = on-foot mob (Upior); enemy-trampler = enemy walker (Ironclad). */
+  type: "creature" | "enemy-trampler";
+  /** One row per in-game variant, e.g. Upior Melee/Ranged or Ironclad Buckler/Falchion.
+   *  hp is null when the datamine couldn't read the variant's HealthDataComponent. */
+  variants: { name: string; hp: number | null }[];
+}
+
 export interface LocalizedText {
   name: string;
   description: string | null;
@@ -57,7 +65,7 @@ export interface LocalizedText {
 export interface Entity {
   id: string;
   slug: string;
-  kind: string; // "item" | "environment" | "trampler-part" | "tech-node"
+  kind: string; // "item" | "environment" | "trampler-part" | "tech-node" (NPCs are environment + enemyStats)
   name: string;
   description: string | null;
   category: string;
@@ -70,6 +78,8 @@ export interface Entity {
   itemStats: ItemStats | null;
   tramplerStats: TramplerStats | null;
   techNodeStats: TechNodeStats | null;
+  /** Present only on kind:"enemy" entities (NPC pages). Absent on all other kinds. */
+  enemyStats?: EnemyStats | null;
   /** Optional per-locale translations (locale code -> text). EN remains the primary
    *  `name`/`description`; this carries other locales. Absent when no translations. */
   i18n?: Record<string, LocalizedText>;

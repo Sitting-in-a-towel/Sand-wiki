@@ -1,0 +1,702 @@
+{
+ "meta": {
+  "source": "world_spawns.json",
+  "items": 98,
+  "unresolvedBlueprints": 167
+ },
+ "source": {
+  "id": "world-ground-loot",
+  "slug": "world-ground-loot",
+  "name": "World / Ground Loot",
+  "category": "loot-containers",
+  "icon": null
+ },
+ "loot": [
+  {
+   "slug": "sniper-rifle-ammo",
+   "name": "11x54 mm Ammo",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "6-16"
+  },
+  {
+   "slug": "sniper-rifle-ammo-high-penetration",
+   "name": "11x54 mm AP Ammo",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "16"
+  },
+  {
+   "slug": "shotgun-ammo",
+   "name": "12 GA Ammo",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "15-20"
+  },
+  {
+   "slug": "shotgun-ammo-explosive",
+   "name": "12 GA Buckshot Ammo (HE)",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "15"
+  },
+  {
+   "slug": "shotgun-ammo-slug",
+   "name": "12 GA Shotgun Slug",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "15"
+  },
+  {
+   "slug": "sniper-rifle-iron-sights",
+   "name": "1874e Petros Rifle",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "sniper-rifle-iron-sights-silencer",
+   "name": "1874e/sd Petros Rifle (Silenced)",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "sniper-rifle",
+   "name": "1874s Petros Sniper Rifle",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "sniper-rifle-silencer",
+   "name": "1874s/sd Petros Sniper Rifle (Silenced)",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "sniper-rifle-double-barrel",
+   "name": "1887/2 \"The Twin\" Double-Barreled Rifle",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "small-cannon-ammo",
+   "name": "40 mm Shell",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "shotgun-turret-ammo",
+   "name": "70 mm Shell",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "turret-ammo",
+   "name": "80 mm Shell",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "pistol-ammo",
+   "name": "8x21 mm Ammo",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "20-50"
+  },
+  {
+   "slug": "pistol-ammo-high-velocity",
+   "name": "8x21 mm HV Ammo",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "50"
+  },
+  {
+   "slug": "rifle-ammo",
+   "name": "9x42 mm Ammo",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "20-30"
+  },
+  {
+   "slug": "rifle-ammo-high-velocity",
+   "name": "9x42 mm HV Ammo",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "30"
+  },
+  {
+   "slug": "rocket-launcher-ammo-armor-piercing",
+   "name": "Armor-Piercing Rocket",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "backpack01",
+   "name": "Backpack",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "game-key-island-door-black",
+   "name": "Black Key",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "semi-automatic-pistol",
+   "name": "Blitz 10R Pistol",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "semi-automatic-pistol-increased-mag",
+   "name": "Blitz 15R Pistol",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "semi-automatic-pistol-decreased-mag",
+   "name": "Blitz PPS-5 Pistol",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "game-key-island-door-blue",
+   "name": "Blue Key",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "game-alarm-lock-box-black",
+   "name": "Box with Radio Beacon (Black)",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "game-alarm-lock-box-green",
+   "name": "Box with Radio Beacon (Green)",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "game-alarm-lock-box-yellow",
+   "name": "Box with Radio Beacon (Yellow)",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "food-can",
+   "name": "Canned Food",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1-2"
+  },
+  {
+   "slug": "canned-fish",
+   "name": "Canned Sea Deer XL",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "resource-metal-t3",
+   "name": "Computing Module",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "resource-coral-piece",
+   "name": "Coral Chunk",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "resource-coral-dust",
+   "name": "Coral Dust",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "coin-crown",
+   "name": "Crowns",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1-25"
+  },
+  {
+   "slug": "artefact-crystal",
+   "name": "Crystal",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "projectile-sphere-shield",
+   "name": "Domovyk Protective Dome",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "shotgun-handmade",
+   "name": "Drobulet Shotgun",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "shotgun-handmade-choke",
+   "name": "Drobulet Shotgun (Vertical Choke)",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "wok-bomb",
+   "name": "E-Wok Bomb",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "revolver-small-dusters",
+   "name": "EB \"Bantam\" Revolver",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "revolver-quick-reload-eight-shot",
+   "name": "EB \"Tiszt\" Award Revolver",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "revolver-quick-reload",
+   "name": "EB \"Vita\" Police Revolver",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "revolver-small",
+   "name": "EB \"Zseb\" Revolver",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "game-packed-shotgun-turret-t4-double-barrel-container",
+   "name": "Experimental 2x70 mm Twin Shotgun Cannon Kit",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "game-packed-auto-turret-t4-accelerating-container",
+   "name": "Experimental 40 mm Autocannon Kit",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "resource-fabric",
+   "name": "Fabric",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "resource-fabric-scraps",
+   "name": "Fabric Scraps",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "ficus",
+   "name": "Ficus",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "game-key-island-door-fort",
+   "name": "Fort Storage Room Key",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "game-keyislanddoorgreen",
+   "name": "game_keyIslandDoorGreen",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "game-keylockedbox",
+   "name": "game_keyLockedBox",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "resource-gunpowder",
+   "name": "Gunpowder",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "grenade-contact",
+   "name": "HG-6 Contact Grenade",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "rocket-launcher-ammo-high-explosion",
+   "name": "High-Explosive Rocket",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "resource-high-grade-gunpowder",
+   "name": "High-Grade Gunpowder",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "repeater-rifle-quick-reload",
+   "name": "KF866/9R \"Mehrzel\" Repeater",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "resource-leviathan-meat",
+   "name": "Leviathan Meat",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "resource-leviathan-skin",
+   "name": "Leviathan Skin",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "rifle-musket",
+   "name": "M1866/9 \"Einzel\" Breechloader",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "repeater-rifle",
+   "name": "M82 Rifle",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "resource-metal-t1",
+   "name": "Mechanical Parts",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "med-kit",
+   "name": "MedKit",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1-6"
+  },
+  {
+   "slug": "resource-metal-rods",
+   "name": "Metal Rods",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "resource-mixtures",
+   "name": "Mixtures",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "boosted-energy-bar",
+   "name": "NZ Mk1 Modified Energy Rod",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "energy-bar",
+   "name": "NZ Mk2 Energy Rod",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "smokeless-energy-bar",
+   "name": "NZ Mk2-RF Smokeless Energy Rod",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "old-jacket",
+   "name": "Old Smuggler's Jacket",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "resource-optic-lenses",
+   "name": "Optic Lenses",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "orbital-strike-gun",
+   "name": "Orbital Strike Pointer",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "shotgun",
+   "name": "Pepper Mill Shotgun",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "projectile-amplifier",
+   "name": "Pestkop Lorenz Amplifier",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "resource-metal-t2",
+   "name": "Pneumatic Parts",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "health-emitter",
+   "name": "Podorozhnyk Bio-Emitter",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "game-packed-auto-turret-t3-container",
+   "name": "Pristine 40 mm Autocannon Kit",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "game-packed-shotgun-turret-t3-container",
+   "name": "Pristine 70 mm Shotgun Cannon Kit",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "game-packed-turret-t3-container",
+   "name": "Pristine 80 mm Naval Cannon Kit",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "crystal-handles",
+   "name": "Raw Aurogen Crystal",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "game-key-island-door-red",
+   "name": "Red Key",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "resource-reinforced-leather-strips",
+   "name": "Reinforced Leather Strips",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "repair-kit",
+   "name": "Repair Kit",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "smoke-grenade",
+   "name": "RG79s Smoke Grenade",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "game-packed-auto-turret-t1-container",
+   "name": "Rusty 40 mm Autocannon Kit",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "game-packed-shotgun-turret-t1-container",
+   "name": "Rusty 70 mm Shotgun Cannon Kit",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "game-packed-turret-t1-container",
+   "name": "Rusty 80 mm Naval Cannon Kit",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "rocket-launcher",
+   "name": "RW1 Rocket Launcher",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "resource-metal-parts",
+   "name": "Scrap Metal",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "resource-scrapped-ammo",
+   "name": "Scrapped Ammo",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "anti-reactor-gun",
+   "name": "The Great Silence",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "resource-threads",
+   "name": "Threads",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "c4-dynamite",
+   "name": "Time Bomb",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "shotgun-triplet",
+   "name": "Triplet Shotgun",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "v1-repair-patch",
+   "name": "V1 Repair Patch",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "projectile-deflect-shield",
+   "name": "Von Liebig Reflector",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "resource-weapon-parts",
+   "name": "Weapon Parts",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "game-key-island-door-white",
+   "name": "White Key",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "game-packed-auto-turret-t2-container",
+   "name": "Worn 40 mm Autocannon Kit",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "game-packed-shotgun-turret-t2-container",
+   "name": "Worn 70 mm Shotgun Cannon Kit",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  },
+  {
+   "slug": "game-packed-turret-t2-container",
+   "name": "Worn 80 mm Naval Cannon Kit",
+   "chance": null,
+   "tier": "Ground spawn",
+   "count": "1"
+  }
+ ]
+}

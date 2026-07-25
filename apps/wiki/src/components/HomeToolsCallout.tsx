@@ -75,10 +75,9 @@ export interface HomeToolsCalloutProps {
   tramplerParts: number;
 }
 
-/** Home-page "Plan your run" box: two equal CTA panels pointing at the two
- *  interactive tools (tech tree + trampler builder). Sits directly below the
- *  search hero. Stat strips use live counts; builder's "live stats"/"modular"
- *  labels are static descriptors. */
+/** Home-page "Plan your run" box: equal CTA panels for the interactive tools
+ *  (tech tree, trampler builder, 3D map). Sits directly below the search hero.
+ *  Stat strips use live counts where available; the map's are static descriptors. */
 export function HomeToolsCallout({ techNodes, factions, tramplerParts }: HomeToolsCalloutProps) {
   const tools: Tool[] = [
     {
@@ -128,6 +127,28 @@ export function HomeToolsCallout({ techNodes, factions, tramplerParts }: HomeToo
         </svg>
       ),
     },
+    {
+      href: "/map",
+      kicker: "Exploration",
+      title: "3D Map",
+      desc: "Fly through every island, fort and POI in 3D — filter objects by category and click any crate to jump to its loot.",
+      cta: "Open the map",
+      accent: "text-info",
+      halo: "hover:shadow-[0_16px_44px_-20px_rgba(106,169,201,0.5)]",
+      stats: [
+        { value: "3D", label: "fly-around" },
+        { value: "Loot", label: "on click" },
+        { value: "All", label: "locations" },
+      ],
+      glyph: (
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="size-full">
+          <path d="M12 18 24 13 40 19 52 14V46L40 51 24 45 12 50Z" />
+          <path d="M24 13v32M40 19v32" />
+          <circle cx="37" cy="29" r="4.5" />
+          <path d="M37 33.5V40" />
+        </svg>
+      ),
+    },
   ];
 
   return (
@@ -142,10 +163,10 @@ export function HomeToolsCallout({ techNodes, factions, tramplerParts }: HomeToo
           </h2>
         </div>
         <p className="max-w-sm text-[13px] text-muted-foreground sm:text-right">
-          Go deeper than the database — chart the research path, then bolt the machine together.
+          Go deeper than the database — chart the research path, bolt the machine together, then explore it all in 3D.
         </p>
       </div>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {tools.map((t) => (
           <ToolCard key={t.href} tool={t} />
         ))}

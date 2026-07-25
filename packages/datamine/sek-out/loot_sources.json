@@ -1298,8 +1298,8 @@
      {
       "item": "item_resourceMetal_t2",
       "pct": 100.0,
-      "min": 35,
-      "max": 45
+      "min": 20,
+      "max": 30
      },
      {
       "item": "item_resourceMetalParts",
@@ -1330,8 +1330,8 @@
      {
       "item": "item_resourceMetal_t2",
       "pct": 100.0,
-      "min": 40,
-      "max": 60
+      "min": 30,
+      "max": 40
      },
      {
       "item": "item_resourceMetalParts",
@@ -1424,8 +1424,8 @@
      {
       "item": "item_resourceMetal_t2",
       "pct": 100.0,
-      "min": 25,
-      "max": 35
+      "min": 10,
+      "max": 20
      },
      {
       "item": "item_resourceMetalParts",
@@ -1462,8 +1462,8 @@
      {
       "item": "item_resourceMetal_t2",
       "pct": 100.0,
-      "min": 20,
-      "max": 40
+      "min": 15,
+      "max": 30
      },
      {
       "item": "item_resourceMetalParts",
@@ -1505,8 +1505,8 @@
      {
       "item": "item_resourceMetal_t2",
       "pct": 100.0,
-      "min": 15,
-      "max": 25
+      "min": 10,
+      "max": 20
      },
      {
       "item": "item_resourceMetalParts",
@@ -1531,8 +1531,8 @@
      {
       "item": "item_resourceMetal_t2",
       "pct": 100.0,
-      "min": 20,
-      "max": 40
+      "min": 15,
+      "max": 30
      },
      {
       "item": "item_resourceMetalParts",
@@ -1562,8 +1562,8 @@
      {
       "item": "item_resourceMetal_t2",
       "pct": 100.0,
-      "min": 30,
-      "max": 40
+      "min": 20,
+      "max": 30
      },
      {
       "item": "item_resourceMetalParts",
@@ -1588,8 +1588,8 @@
      {
       "item": "item_resourceMetal_t2",
       "pct": 100.0,
-      "min": 40,
-      "max": 60
+      "min": 30,
+      "max": 40
      },
      {
       "item": "item_resourceMetalParts",
@@ -1619,8 +1619,8 @@
      {
       "item": "item_resourceMetal_t2",
       "pct": 100.0,
-      "min": 40,
-      "max": 50
+      "min": 20,
+      "max": 30
      },
      {
       "item": "item_resourceMetalParts",
@@ -1657,8 +1657,8 @@
      {
       "item": "item_resourceMetal_t2",
       "pct": 100.0,
-      "min": 5,
-      "max": 60
+      "min": 30,
+      "max": 40
      },
      {
       "item": "item_resourceMetalParts",
@@ -1802,8 +1802,8 @@
      {
       "item": "item_resourceMetal_t2",
       "pct": 100.0,
-      "min": 20,
-      "max": 30
+      "min": 10,
+      "max": 20
      },
      {
       "item": "item_resourceMetalParts",
@@ -1834,8 +1834,8 @@
      {
       "item": "item_resourceMetal_t2",
       "pct": 100.0,
-      "min": 20,
-      "max": 40
+      "min": 15,
+      "max": 30
      },
      {
       "item": "item_resourceMetalParts",
@@ -4870,7 +4870,7 @@
      {
       "item": "item_shotgunTurretAmmo_slug",
       "pct": 20.5,
-      "min": 3,
+      "min": 5,
       "max": 7
      },
      {
@@ -4900,7 +4900,7 @@
      {
       "item": "item_turretAmmo_delayedDetonation",
       "pct": 7.7,
-      "min": 4,
+      "min": 5,
       "max": 7
      },
      {
@@ -4932,20 +4932,20 @@
      {
       "item": "item_turretAmmo_highVelocity",
       "pct": 25.6,
-      "min": 8,
-      "max": 15
+      "min": 10,
+      "max": 12
      },
      {
       "item": "item_shotgunTurretAmmo_slug",
       "pct": 20.5,
       "min": 10,
-      "max": 15
+      "max": 12
      },
      {
       "item": "item_smallCannonAmmo_longRange",
       "pct": 20.5,
       "min": 25,
-      "max": 35
+      "max": 45
      },
      {
       "item": "item_resourceMetal_t3",
@@ -4963,13 +4963,13 @@
       "item": "item_smallCannonAmmo_lowRecoil",
       "pct": 12.8,
       "min": 25,
-      "max": 35
+      "max": 45
      },
      {
       "item": "item_turretAmmo_delayedDetonation",
       "pct": 7.7,
-      "min": 8,
-      "max": 10
+      "min": 10,
+      "max": 12
      },
      {
       "item": "item_boostedEnergyBar",

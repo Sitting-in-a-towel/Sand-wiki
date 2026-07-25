@@ -1,18 +1,9 @@
 {
-  "_doc": "Entities whose icon is absent (null) or points at a file that does not exist on disk — TODO for the next datamining/extraction pass. By kind: items -> extract_icons.py must emit /icons/<sprite> (a 'file-missing' means the data references a sprite filename that was never produced; check the icon mapping/filename). trampler-part -> render_part_thumbs.py / export_part_meshes_v3.py (/tramplers). By design (reported under byDesign, NOT needsExtraction): tech-node entities have no own icon (the /tech page renders the unlock's glyph); environment locations (landmarks/game-modes) have NO icon in the game files at all, so they are never extractable (loot containers, which do have art, are unaffected).",
+  "_doc": "Entities whose icon is absent (null) or points at a file that does not exist on disk — TODO for the next datamining/extraction pass. By kind: items -> extract_icons.py must emit /icons/<sprite> (a 'file-missing' means the data references a sprite filename that was never produced; check the icon mapping/filename). trampler-part -> render_part_thumbs.py / export_part_meshes_v3.py (/tramplers). By design (reported under byDesign, NOT needsExtraction): tech-node entities have no own icon (the /tech page renders the unlock's glyph); environment locations (landmarks/game-modes) have NO icon in the game files at all, so they are never extractable (loot containers, which do have art, are unaffected). NPC entities (Upior/Ironclad, kind environment/creatures|enemy-tramplers) likewise have no in-game item sprite and ship iconless.",
   "summary": {
-    "trampler-part:null": 2,
-    "item:null": 1
+    "trampler-part:null": 2
   },
   "needsExtraction": [
-    {
-      "slug": "ironclad-s-cargo-box",
-      "name": "Ironclad's Cargo Box",
-      "kind": "item",
-      "category": "misc",
-      "icon": null,
-      "issue": "null"
-    },
     {
       "slug": "captain-crew-module",
       "name": "S&H Captain's Compartment",
@@ -32,6 +23,6 @@
   ],
   "byDesign": {
     "techNodeNoIcon": 93,
-    "environmentNoIcon": 19
+    "environmentNoIcon": 26
   }
 }

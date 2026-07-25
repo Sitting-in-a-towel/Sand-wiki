@@ -1,0 +1,36 @@
+{
+ "_doc": "Enemy NPC definitions + item-slug aliases for build_enemies.py. lootEffort maps a variant to a loot_sources 'Mob Drops' cell effort; enemies with a top-level lootGroup use a single merged pool from their lootSource + inline mandatory drops at 100%. extraTables lists loot-table ids (resolved directly from loottables_{voyage,storm}.json) whose drops the source doesn't capture (orphaned on-death drops) — emitted into lootGroup with no computed chance.",
+ "itemSlugAliases": {
+  "game_coinCrownPile_10": "coin-crown",
+  "game_ValuablePiles01_mobDrop": "small-valuables",
+  "item_alloySteel": "resource-alloy-steel",
+  "item_weirdCoral": "resource-weird-coral",
+  "item_repairKit": "repair-kit"
+ },
+ "enemies": [
+  {
+   "id": "upior", "slug": "upior", "name": "Upiór", "type": "creature", "icon": null,
+   "lootSource": "Mob Drops",
+   "variants": [
+    { "name": "Ranged", "epb": "mob_ghoul", "lootEffort": "ranged mob" },
+    { "name": "Melee", "epb": "mob_ghoul_melee", "lootEffort": "melee mob" },
+    { "name": "Melee (Shovel)", "epb": "mob_ghoul_turret", "lootEffort": "melee mob (tool)" }
+   ]
+  },
+  {
+   "id": "ironclad", "slug": "ironclad", "name": "Ironclad", "type": "enemy-trampler", "icon": null,
+   "lootSource": "Ironclad Loot Box",
+   "lootGroup": "Loot",
+   "extraTables": [
+    "ironcladLoot_repairKitEntity_set",
+    "ironcladLoot_packedTurretT2_80mm_set", "ironcladLoot_packedTurretT2_70mm_set", "ironcladLoot_packedTurretT2_40mm_set",
+    "ironcladLoot_packedTurretT3_80mm_set", "ironcladLoot_packedTurretT3_70mm_set", "ironcladLoot_packedTurretT3_40mm_set"
+   ],
+   "variants": [
+    { "name": "Buckler", "epb": "mob_ironclad_Buckler" },
+    { "name": "Falchion", "epb": "mob_ironclad_Falchion" },
+    { "name": "Tophelm", "epb": "mob_ironclad_Tophelm" }
+   ]
+  }
+ ]
+}

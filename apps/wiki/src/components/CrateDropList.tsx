@@ -2,7 +2,8 @@ import Link from "next/link";
 import type { CrateDrop } from "@/lib/queries";
 import { SortableTable, type SortableTableRow } from "@/components/SortableTable";
 
-/** Reverse loot view on an item page: which crates drop this item (grouped, with tiers). */
+/** Reverse loot view on an item page: which sources drop this item — crates, landmarks, and
+ *  NPCs (creatures / enemy-tramplers) — grouped, with tier/group labels. */
 export function CrateDropList({ drops }: { drops: CrateDrop[] }) {
   const byCrate = new Map<string, { name: string; tiers: string[] }>();
   for (const d of drops) {
@@ -23,8 +24,8 @@ export function CrateDropList({ drops }: { drops: CrateDrop[] }) {
   return (
     <div className="overflow-x-auto">
       <SortableTable
-        caption="Crates that drop this item"
-        columns={[{ label: "Crate" }, { label: "Tiers" }]}
+        caption="Sources that drop this item"
+        columns={[{ label: "Source" }, { label: "Tiers" }]}
         rows={rows}
       />
     </div>

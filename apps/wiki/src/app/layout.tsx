@@ -40,6 +40,7 @@ export const metadata: Metadata = {
 const DISCORD_URL = "https://discord.gg/sandgame";
 const STEAM_URL =
   "https://store.steampowered.com/app/1431300/SAND_Raiders_of_Sophie/";
+const SUPPORT_URL = "https://buymeacoffee.com/baalmarduk";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   // Dark-only: `.dark` drives the shadcn token layer; color-scheme is set in CSS.
@@ -74,6 +75,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     className="text-primary underline-offset-2 hover:underline"
                   >
                     Get the game ↗
+                  </a>
+                  <a
+                    href={SUPPORT_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary underline-offset-2 hover:underline"
+                  >
+                    Buy me a coffee ☕
                   </a>
                 </nav>
 

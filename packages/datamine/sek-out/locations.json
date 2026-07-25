@@ -1854,6 +1854,13 @@
    },
    {
     "types": [
+     "Money"
+    ],
+    "mask": 256,
+    "max": 20
+   },
+   {
+    "types": [
      "Food Crate"
     ],
     "mask": 2097152,

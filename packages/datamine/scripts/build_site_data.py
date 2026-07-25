@@ -86,7 +86,7 @@ MANUAL_ICON = {
     'ArtefactCrystal': 'icon_artefact_crystal',
     'game_keyIslandDoorGreen': 'icon_item_game_keyLockedDoorGreen',
     'game_treasureShovel': 'icon_item_treasureShovel',
-    'item_foodCan': 'icon_item_game_fishCan',
+    'item_foodCan': 'icon_food',
     'item_grenadeContact': 'icon_grenade',
     'game_coinCrownPile_10': 'icon_crownCoins',
     'game_ValuablePiles01_mobDrop': 'icon_item_smallValuables',

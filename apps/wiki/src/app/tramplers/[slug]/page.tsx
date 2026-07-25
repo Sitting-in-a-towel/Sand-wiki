@@ -105,7 +105,6 @@ export default async function TramplerPartPage({ params }: { params: Params }) {
         ) : undefined
       }
       tabs={tabs}
-      sourceUrl={part.sourceUrl}
     />
   );
 }

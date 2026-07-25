@@ -25,7 +25,8 @@ const DOC =
   "By design (reported under byDesign, NOT needsExtraction): tech-node entities have no own " +
   "icon (the /tech page renders the unlock's glyph); environment locations (landmarks/game-" +
   "modes) have NO icon in the game files at all, so they are never extractable (loot " +
-  "containers, which do have art, are unaffected).";
+  "containers, which do have art, are unaffected). NPC entities (Upior/Ironclad, kind " +
+  "environment/creatures|enemy-tramplers) likewise have no in-game item sprite and ship iconless.";
 
 /** Classify entity images using an injected file-existence check (so it is pure/testable).
  *  `fileExists` receives the entity's `icon` value (e.g. "/icons/x.png"). Entities that have
@@ -45,7 +46,7 @@ export function classifyImages(
   for (const e of entities) {
     if (!e.icon) {
       if (e.kind === "tech-node") { techNodeNoIcon++; continue; }
-      if (e.kind === "environment") { environmentNoIcon++; continue; } // locations have no game-file icon
+      if (e.kind === "environment") { environmentNoIcon++; continue; } // locations + NPCs have no game-file icon
       bump(`${e.kind}:null`);
       needsExtraction.push({ slug: e.slug, name: e.name, kind: e.kind, category: e.category, icon: null, issue: "null" });
     } else if (!fileExists(e.icon)) {

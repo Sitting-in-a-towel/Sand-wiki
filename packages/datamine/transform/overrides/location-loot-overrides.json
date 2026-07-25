@@ -1,0 +1,16 @@
+{
+ "_doc": "Per-location NOTABLE (location-exclusive) loot for build_location_loot.py. Most locations share a common artefact-equipment pool (generic, lives in World/Ground Loot); only a few have location-exclusive drops. A blueprint counts as notable for a location if it resolves to an item page AND spawns in <= exclusiveMaxLocations distinct locations. `locations` maps prefab roots to a wiki location slug (mint:true creates the entity). Chance is computed from the spawner set weights.",
+ "exclusiveMaxLocations": 3,
+ "excludeSpawnerPattern": "unrecoverable|Supervisor",
+ "excludeBlueprintPattern": "^walker_|destructibleCoral|^game_key|^game_sqrDoor|^game_ai|^mob_|^game_contract|^game_.*Spawner",
+ "locations": [
+  { "root": "loc_event_Dreadnought", "slug": "dreadnaught", "name": "Dreadnought", "mint": false },
+  { "root": "env_dreadnough_setup", "slug": "dreadnaught", "name": "Dreadnought", "mint": false },
+  { "root": "loc_event_ShipGraveyard", "slug": "ship-graveyard", "name": "Ship Graveyard", "category": "landmarks", "mint": true, "description": "The Ship Graveyard (the \"worm pit\") is an event-exclusive [[storm-dive]] finale. It only appears on 9-city maps, at about 1 in 3 — the [[dreadnaught]] takes the other 2 in 3. Like the Dreadnought, it holds experimental cannon kits." }
+ ],
+ "itemSlugAliases": {
+  "game_packedTurretT4RailGun_Container": "game-packed-turret-t4-rail-gun-container",
+  "game_packedAutoTurretT4Accelerating_Container": "game-packed-auto-turret-t4-accelerating-container",
+  "game_packedShotgunTurretT4DoubleBarrel_Container": "game-packed-shotgun-turret-t4-double-barrel-container"
+ }
+}

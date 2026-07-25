@@ -1,0 +1,377 @@
+{
+ "meta": {
+  "source": "conf_worldContractsConfig._lockedBoxLootData",
+  "crates": 3
+ },
+ "crates": [
+  {
+   "id": "military-box",
+   "slug": "military-box",
+   "name": "Military Box",
+   "category": "loot-containers",
+   "icon": null,
+   "requiresKeySlug": "game-key-locked-box",
+   "requiresKeyName": "Box Key",
+   "loot": [
+    {
+     "slug": "turret-ammo",
+     "name": "80 mm Shell",
+     "chance": 98.7,
+     "tier": "Loot",
+     "count": "20-60",
+     "resolved": true
+    },
+    {
+     "slug": "grenade-contact",
+     "name": "HG-6 Contact Grenade",
+     "chance": 44.9,
+     "tier": "Loot",
+     "count": "2-3",
+     "resolved": true
+    },
+    {
+     "slug": "c4-dynamite",
+     "name": "Time Bomb",
+     "chance": 43.7,
+     "tier": "Loot",
+     "count": "2-3",
+     "resolved": true
+    },
+    {
+     "slug": "pistol-ammo",
+     "name": "8x21 mm Ammo",
+     "chance": 22.8,
+     "tier": "Loot",
+     "count": "200",
+     "resolved": true
+    },
+    {
+     "slug": "sniper-rifle-ammo",
+     "name": "11x54 mm Ammo",
+     "chance": 21.5,
+     "tier": "Loot",
+     "count": "16-32",
+     "resolved": true
+    },
+    {
+     "slug": "rifle-ammo",
+     "name": "9x42 mm Ammo",
+     "chance": 21.5,
+     "tier": "Loot",
+     "count": "60-120",
+     "resolved": true
+    },
+    {
+     "slug": "shotgun-ammo",
+     "name": "12 GA Ammo",
+     "chance": 21.5,
+     "tier": "Loot",
+     "count": "60",
+     "resolved": true
+    },
+    {
+     "slug": "shotgun",
+     "name": "Pepper Mill Shotgun",
+     "chance": 20.2,
+     "tier": "Loot",
+     "count": "2",
+     "resolved": true
+    },
+    {
+     "slug": "repeater-rifle",
+     "name": "M82 Rifle",
+     "chance": 20.2,
+     "tier": "Loot",
+     "count": "2",
+     "resolved": true
+    },
+    {
+     "slug": "revolver-quick-reload",
+     "name": "EB \"Vita\" Police Revolver",
+     "chance": 20.2,
+     "tier": "Loot",
+     "count": "2",
+     "resolved": true
+    },
+    {
+     "slug": "sniper-rifle-iron-sights",
+     "name": "1874e Petros Rifle",
+     "chance": 20.2,
+     "tier": "Loot",
+     "count": "1",
+     "resolved": true
+    },
+    {
+     "slug": "small-cannon-ammo",
+     "name": "40 mm Shell",
+     "chance": 11.4,
+     "tier": "Loot",
+     "count": "80-160",
+     "resolved": true
+    },
+    {
+     "slug": "shotgun-turret-ammo",
+     "name": "70 mm Shell",
+     "chance": 11.4,
+     "tier": "Loot",
+     "count": "30-60",
+     "resolved": true
+    },
+    {
+     "slug": "rocket-launcher-ammo-armor-piercing",
+     "name": "Armor-Piercing Rocket",
+     "chance": 10.8,
+     "tier": "Loot",
+     "count": "2-4",
+     "resolved": true
+    },
+    {
+     "slug": "sniper-rifle",
+     "name": "1874s Petros Sniper Rifle",
+     "chance": 1.3,
+     "tier": "Loot",
+     "count": "1",
+     "resolved": true
+    },
+    {
+     "slug": "semi-automatic-pistol-increased-mag",
+     "name": "Blitz 15R Pistol",
+     "chance": 1.3,
+     "tier": "Loot",
+     "count": "2",
+     "resolved": true
+    },
+    {
+     "slug": "revolver-quick-reload-eight-shot",
+     "name": "EB \"Tiszt\" Award Revolver",
+     "chance": 1.3,
+     "tier": "Loot",
+     "count": "1",
+     "resolved": true
+    },
+    {
+     "slug": "shotgun-triplet",
+     "name": "Triplet Shotgun",
+     "chance": 1.3,
+     "tier": "Loot",
+     "count": "1",
+     "resolved": true
+    },
+    {
+     "slug": "rocket-launcher-ammo-high-explosion",
+     "name": "High-Explosive Rocket",
+     "chance": 0.6,
+     "tier": "Loot",
+     "count": "2",
+     "resolved": true
+    },
+    {
+     "slug": "turret-ammo-emp",
+     "name": "EMP 80 mm Shell",
+     "chance": 0.6,
+     "tier": "Loot",
+     "count": "3",
+     "resolved": true
+    },
+    {
+     "slug": "turret-ammo-high-velocity",
+     "name": "High Velocity 80 mm Shell",
+     "chance": 0.6,
+     "tier": "Loot",
+     "count": "45",
+     "resolved": true
+    },
+    {
+     "slug": "turret-ammo-delayed-detonation",
+     "name": "80 mm Proximity Fuse Shell",
+     "chance": 0.6,
+     "tier": "Loot",
+     "count": "30",
+     "resolved": true
+    },
+    {
+     "slug": "shotgun-turret-ammo-slug",
+     "name": "70 mm Shotgun Cannon Slug",
+     "chance": 0.6,
+     "tier": "Loot",
+     "count": "45",
+     "resolved": true
+    },
+    {
+     "slug": "shotgun-turret-ammo-smoke",
+     "name": "Smoke 70 mm Shell",
+     "chance": 0.6,
+     "tier": "Loot",
+     "count": "5",
+     "resolved": true
+    },
+    {
+     "slug": "small-cannon-ammo-low-recoil",
+     "name": "Low-Recoil 40 mm Shell",
+     "chance": 0.6,
+     "tier": "Loot",
+     "count": "80",
+     "resolved": true
+    },
+    {
+     "slug": "small-cannon-ammo-long-range",
+     "name": "Long-Range 40 mm Shell",
+     "chance": 0.6,
+     "tier": "Loot",
+     "count": "120",
+     "resolved": true
+    },
+    {
+     "slug": "repeater-rifle-quick-reload",
+     "name": "KF866/9R \"Mehrzel\" Repeater",
+     "chance": 0.6,
+     "tier": "Loot",
+     "count": "1",
+     "resolved": true
+    },
+    {
+     "slug": "rifle-repeater-aperture",
+     "name": "M82 \"Aperture\" Rifle",
+     "chance": 0.6,
+     "tier": "Loot",
+     "count": "1",
+     "resolved": true
+    }
+   ]
+  },
+  {
+   "id": "valuables-box",
+   "slug": "valuables-box",
+   "name": "Valuables Box",
+   "category": "loot-containers",
+   "icon": null,
+   "requiresKeySlug": "game-key-locked-box",
+   "requiresKeyName": "Box Key",
+   "loot": [
+    {
+     "slug": "coin-crown",
+     "name": "Crowns",
+     "chance": 100.0,
+     "tier": "Loot",
+     "count": "1000-2000",
+     "resolved": true
+    },
+    {
+     "slug": "small-valuables",
+     "name": "Small Valuables",
+     "chance": 47.6,
+     "tier": "Loot",
+     "count": "150",
+     "resolved": true
+    },
+    {
+     "slug": "valuable-papers",
+     "name": "Valuable Papers",
+     "chance": 47.6,
+     "tier": "Loot",
+     "count": "75",
+     "resolved": true
+    },
+    {
+     "slug": "artefact-crystal",
+     "name": "Crystal",
+     "chance": 2.4,
+     "tier": "Loot",
+     "count": "10",
+     "resolved": true
+    },
+    {
+     "slug": "game-key-island-door-green",
+     "name": "Green Key",
+     "chance": 2.4,
+     "tier": "Loot",
+     "count": "1",
+     "resolved": true
+    },
+    {
+     "slug": "game-key-locked-box",
+     "name": "Box Key",
+     "chance": 2.4,
+     "tier": "Loot",
+     "count": "1",
+     "resolved": true
+    }
+   ]
+  },
+  {
+   "id": "utility-box",
+   "slug": "utility-box",
+   "name": "Utility Box",
+   "category": "loot-containers",
+   "icon": null,
+   "requiresKeySlug": "game-key-locked-box",
+   "requiresKeyName": "Box Key",
+   "loot": [
+    {
+     "slug": "resource-metal-t1",
+     "name": "Mechanical Parts",
+     "chance": 100.0,
+     "tier": "Loot",
+     "count": "400-750",
+     "resolved": true
+    },
+    {
+     "slug": "resource-metal-t2",
+     "name": "Pneumatic Parts",
+     "chance": 100.0,
+     "tier": "Loot",
+     "count": "75-150",
+     "resolved": true
+    },
+    {
+     "slug": "med-kit",
+     "name": "MedKit",
+     "chance": 50.0,
+     "tier": "Loot",
+     "count": "10-15",
+     "resolved": true
+    },
+    {
+     "slug": "food-can",
+     "name": "Canned Food",
+     "chance": 45.5,
+     "tier": "Loot",
+     "count": "20",
+     "resolved": true
+    },
+    {
+     "slug": "energy-bar",
+     "name": "NZ Mk2 Energy Rod",
+     "chance": 45.5,
+     "tier": "Loot",
+     "count": "5",
+     "resolved": true
+    },
+    {
+     "slug": "resource-metal-t3",
+     "name": "Computing Module",
+     "chance": 4.5,
+     "tier": "Loot",
+     "count": "5",
+     "resolved": true
+    },
+    {
+     "slug": "game-key-locked-box",
+     "name": "Box Key",
+     "chance": 4.5,
+     "tier": "Loot",
+     "count": "1",
+     "resolved": true
+    },
+    {
+     "slug": "old-jacket-t3",
+     "name": "SGOW SW.73 Light Armor",
+     "chance": 4.5,
+     "tier": "Loot",
+     "count": "1",
+     "resolved": true
+    }
+   ]
+  }
+ ]
+}

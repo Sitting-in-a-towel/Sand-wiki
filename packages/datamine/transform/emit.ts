@@ -42,3 +42,22 @@ export function writeRecipesMissingReport(missing: unknown): void {
   mkdirSync(REPORTS, { recursive: true });
   writeFileSync(resolve(REPORTS, "missing-recipes.json"), JSON.stringify(missing, null, 2) + "\n");
 }
+
+/** Collect references to slugs absent from the final entity set. Non-loot links and recipes
+ *  pass through from the baseline unchecked, so a pruned/removed entity that still participates
+ *  in one would otherwise ship a silent dangling reference (loot links are already filtered
+ *  upstream). Returns human-readable "kind role: slug" strings; the caller warns. Drops nothing. */
+export function reportDanglingRefs(entities: Entity[], links: EntityLink[], recipes: Recipe[]): string[] {
+  const known = new Set(entities.map((e) => e.slug));
+  const out: string[] = [];
+  for (const l of links) {
+    if (l.sourceSlug && !known.has(l.sourceSlug)) out.push(`link ${l.role} source: ${l.sourceSlug}`);
+    if (l.targetSlug && !known.has(l.targetSlug)) out.push(`link ${l.role} target: ${l.targetSlug}`);
+  }
+  for (const r of recipes) {
+    for (const i of r.inputs) if (i.itemSlug && !known.has(i.itemSlug)) out.push(`recipe ${r.slug} input: ${i.itemSlug}`);
+    for (const o of r.outputs) if (o.itemSlug && !known.has(o.itemSlug)) out.push(`recipe ${r.slug} output: ${o.itemSlug}`);
+    if (r.locationSlug && !known.has(r.locationSlug)) out.push(`recipe ${r.slug} location: ${r.locationSlug}`);
+  }
+  return [...new Set(out)];
+}

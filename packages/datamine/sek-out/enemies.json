@@ -1,0 +1,333 @@
+{
+ "meta": {
+  "source": "enemy_stats.json + loot_sources.json",
+  "enemies": 2
+ },
+ "enemies": [
+  {
+   "id": "upior",
+   "slug": "upior",
+   "name": "Upiór",
+   "type": "creature",
+   "icon": null,
+   "variants": [
+    {
+     "name": "Ranged",
+     "hp": 100
+    },
+    {
+     "name": "Melee",
+     "hp": 100
+    },
+    {
+     "name": "Melee (Shovel)",
+     "hp": 100
+    }
+   ],
+   "loot": [
+    {
+     "group": "Ranged",
+     "slug": "pistol-ammo",
+     "name": "8x21 mm Ammo",
+     "chance": null,
+     "voyage": "1",
+     "storm": "1",
+     "resolved": true
+    },
+    {
+     "group": "Ranged",
+     "slug": "food-can",
+     "name": "Canned Food",
+     "chance": null,
+     "voyage": "1",
+     "storm": "1",
+     "resolved": true
+    },
+    {
+     "group": "Ranged",
+     "slug": "resource-weapon-parts",
+     "name": "Weapon Parts",
+     "chance": null,
+     "voyage": "1",
+     "storm": "1",
+     "resolved": true
+    },
+    {
+     "group": "Ranged",
+     "slug": "revolver-quick-reload-eight-shot",
+     "name": "EB \"Tiszt\" Award Revolver",
+     "chance": null,
+     "voyage": "1",
+     "storm": "1",
+     "resolved": true
+    },
+    {
+     "group": "Ranged",
+     "slug": "game-key-locked-box",
+     "name": "Box Key",
+     "chance": null,
+     "voyage": "1",
+     "storm": "1",
+     "resolved": true
+    },
+    {
+     "group": "Ranged",
+     "slug": "resource-weird-coral",
+     "name": "Weird Coral",
+     "chance": null,
+     "voyage": "1",
+     "storm": "1",
+     "resolved": false
+    },
+    {
+     "group": "Melee",
+     "slug": "coin-crown",
+     "name": "Crowns",
+     "chance": null,
+     "voyage": "1",
+     "storm": "1",
+     "resolved": true
+    },
+    {
+     "group": "Melee",
+     "slug": "small-valuables",
+     "name": "Small Valuables",
+     "chance": null,
+     "voyage": "1",
+     "storm": "1",
+     "resolved": true
+    },
+    {
+     "group": "Melee",
+     "slug": "resource-metal-t1",
+     "name": "Mechanical Parts",
+     "chance": null,
+     "voyage": "1",
+     "storm": "1",
+     "resolved": true
+    },
+    {
+     "group": "Melee",
+     "slug": "resource-optic-lenses",
+     "name": "Optic Lenses",
+     "chance": null,
+     "voyage": "1",
+     "storm": "1",
+     "resolved": true
+    },
+    {
+     "group": "Melee",
+     "slug": "resource-weird-coral",
+     "name": "Weird Coral",
+     "chance": null,
+     "voyage": "1",
+     "storm": "1",
+     "resolved": false
+    },
+    {
+     "group": "Melee (Shovel)",
+     "slug": null,
+     "name": "game_treasureShovel",
+     "chance": null,
+     "voyage": "1",
+     "storm": "1",
+     "resolved": false
+    }
+   ]
+  },
+  {
+   "id": "ironclad",
+   "slug": "ironclad",
+   "name": "Ironclad",
+   "type": "enemy-trampler",
+   "icon": null,
+   "variants": [
+    {
+     "name": "Buckler",
+     "hp": 5000
+    },
+    {
+     "name": "Falchion",
+     "hp": 4000
+    },
+    {
+     "name": "Tophelm",
+     "hp": 4000
+    }
+   ],
+   "loot": [
+    {
+     "group": "Loot",
+     "slug": "resource-weapon-parts",
+     "name": "Weapon Parts",
+     "chance": 76.9,
+     "voyage": "5-10",
+     "storm": "20-30",
+     "resolved": true
+    },
+    {
+     "group": "Loot",
+     "slug": "energy-bar",
+     "name": "NZ Mk2 Energy Rod",
+     "chance": 64.1,
+     "voyage": "1",
+     "storm": "2-5",
+     "resolved": true
+    },
+    {
+     "group": "Loot",
+     "slug": "food-can",
+     "name": "Canned Food",
+     "chance": 35.9,
+     "voyage": "1-3",
+     "storm": "2-5",
+     "resolved": true
+    },
+    {
+     "group": "Loot",
+     "slug": "turret-ammo-high-velocity",
+     "name": "High Velocity 80 mm Shell",
+     "chance": 25.6,
+     "voyage": "3-7",
+     "storm": "10-12",
+     "resolved": true
+    },
+    {
+     "group": "Loot",
+     "slug": "shotgun-turret-ammo-slug",
+     "name": "70 mm Shotgun Cannon Slug",
+     "chance": 20.5,
+     "voyage": "5-7",
+     "storm": "10-12",
+     "resolved": true
+    },
+    {
+     "group": "Loot",
+     "slug": "small-cannon-ammo-long-range",
+     "name": "Long-Range 40 mm Shell",
+     "chance": 20.5,
+     "voyage": "15-25",
+     "storm": "25-45",
+     "resolved": true
+    },
+    {
+     "group": "Loot",
+     "slug": "resource-metal-t3",
+     "name": "Computing Module",
+     "chance": 19.2,
+     "voyage": "1",
+     "storm": "1-2",
+     "resolved": true
+    },
+    {
+     "group": "Loot",
+     "slug": "shotgun-turret-ammo-smoke",
+     "name": "Smoke 70 mm Shell",
+     "chance": 12.8,
+     "voyage": "1",
+     "storm": "1",
+     "resolved": true
+    },
+    {
+     "group": "Loot",
+     "slug": "small-cannon-ammo-low-recoil",
+     "name": "Low-Recoil 40 mm Shell",
+     "chance": 12.8,
+     "voyage": "15-25",
+     "storm": "25-45",
+     "resolved": true
+    },
+    {
+     "group": "Loot",
+     "slug": "turret-ammo-delayed-detonation",
+     "name": "80 mm Proximity Fuse Shell",
+     "chance": 7.7,
+     "voyage": "5-7",
+     "storm": "10-12",
+     "resolved": true
+    },
+    {
+     "group": "Loot",
+     "slug": "boosted-energy-bar",
+     "name": "NZ Mk1 Modified Energy Rod",
+     "chance": 3.8,
+     "voyage": "1",
+     "storm": "1",
+     "resolved": true
+    },
+    {
+     "group": "Loot",
+     "slug": "resource-alloy-steel",
+     "name": "Alloy Steel",
+     "chance": 100.0,
+     "voyage": "1",
+     "storm": "1",
+     "resolved": false
+    },
+    {
+     "group": "Loot",
+     "slug": "repair-kit",
+     "name": "Repair Kit",
+     "chance": null,
+     "voyage": "1",
+     "storm": "1",
+     "resolved": true
+    },
+    {
+     "group": "Loot",
+     "slug": "game-packed-turret-t2-container",
+     "name": "Worn 80 mm Naval Cannon Kit",
+     "chance": null,
+     "voyage": "1",
+     "storm": "1",
+     "resolved": true
+    },
+    {
+     "group": "Loot",
+     "slug": "game-packed-shotgun-turret-t2-container",
+     "name": "Worn 70 mm Shotgun Cannon Kit",
+     "chance": null,
+     "voyage": "1",
+     "storm": "1",
+     "resolved": true
+    },
+    {
+     "group": "Loot",
+     "slug": "game-packed-auto-turret-t2-container",
+     "name": "Worn 40 mm Autocannon Kit",
+     "chance": null,
+     "voyage": "1",
+     "storm": "1",
+     "resolved": true
+    },
+    {
+     "group": "Loot",
+     "slug": "game-packed-turret-t3-container",
+     "name": "Pristine 80 mm Naval Cannon Kit",
+     "chance": null,
+     "voyage": "1",
+     "storm": "1",
+     "resolved": true
+    },
+    {
+     "group": "Loot",
+     "slug": "game-packed-shotgun-turret-t3-container",
+     "name": "Pristine 70 mm Shotgun Cannon Kit",
+     "chance": null,
+     "voyage": "1",
+     "storm": "1",
+     "resolved": true
+    },
+    {
+     "group": "Loot",
+     "slug": "game-packed-auto-turret-t3-container",
+     "name": "Pristine 40 mm Autocannon Kit",
+     "chance": null,
+     "voyage": "1",
+     "storm": "1",
+     "resolved": true
+    }
+   ]
+  }
+ ]
+}

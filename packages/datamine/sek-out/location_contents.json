@@ -86,7 +86,7 @@
   }
  },
  "Dreadnought": {
-  "benches": 10,
+  "benches": 9,
   "crates": {
    "Weapons Crate": 1,
    "Valuables Crate": 19
@@ -143,15 +143,16 @@
    "lootboxesmedical_mideffort": 6,
    "armort2": 9,
    "randomshotgunturretpacked_higheffort": 2,
-   "rocketrockethighexplosive_m": 2,
+   "rocketrockethighexplosive_m": 5,
+   "rocketarmorpiercing_m": 10,
    "rocketlauncher_m": 1,
    "lootboxesvaluables_onlyhigheffort_m": 3,
    "lootboxesparts_onlyhigheffort_m": 4,
    "lootboxesshells_onlyhigheffort_m": 3,
    "lootboxesfood_onlyhigheffort_m": 3,
    "lootboxesmedical_onlyhigheffort_m": 3,
-   "rocketarmorpiercing_m": 3,
    "lootboxesweapons_onlyhigheffort_m": 3,
+   "wokbombpossible_m": 2,
    "drednoughtlootresupplyshells_m": 12,
    "drednoughtlootresupplyweapons_m": 15,
    "drednoughtlootresupplyammo_m": 7,
@@ -465,6 +466,60 @@
    "lootboxvaluablest2": 1,
    "lootboxvaluablest1_m": 1,
    "alarmlockboxblack": 1
+  }
+ },
+ "Halbmond_FishingVillage": {
+  "benches": 8,
+  "crates": {
+   "Valuables Crate": 2
+  },
+  "treasures": {
+   "Buried Treasure": 8,
+   "Artefact": 1
+  },
+  "mobs": 12,
+  "locked": 15,
+  "items": {
+   "s": 2,
+   "lootboxesfood_mideffort": 14,
+   "containerbox": 46,
+   "lootboxesweapons_mideffort_m": 3,
+   "ficuspossible": 1,
+   "lootboxesvaluables_mideffort": 7,
+   "randomautoturretpacked": 3,
+   "lootboxesparts_mideffort": 11,
+   "lootboxesshells_mideffort": 5,
+   "lootboxesmedical_higheffort_m": 2,
+   "lootboxesweapons_mideffort": 7,
+   "armort2": 1,
+   "randomturretpacked": 3,
+   "alarmlockboxblack": 1,
+   "energyrod": 1,
+   "alarmlockboxgreen": 1,
+   "energyrod_m": 2,
+   "c4dynamite_m": 1,
+   "armort2_m": 2,
+   "randomshotgunturretpacked": 3,
+   "lootboxesmedical_mideffort": 8,
+   "lootboxesvaluables_higheffort_m": 4,
+   "lootboxesvaluables_onlyhigheffort_m": 1,
+   "coincrown_1": 16,
+   "coincrownpile_5": 1,
+   "coincrownpile_15": 6,
+   "coincrownpile_10": 5,
+   "coincrownpile_20": 1,
+   "coincrown_5": 6,
+   "coincrownpile_25": 2,
+   "lootboxesfood_higheffort_m": 2,
+   "sniperrifleammo_m": 1,
+   "armor": 8,
+   "alarmlockboxyellow": 1,
+   "lootboxesweapons_higheffort_m": 3,
+   "somethingcoollighthoutse_m": 1,
+   "lootboxesshells_higheffort_m": 1,
+   "valuablelargecannedfish_m": 1,
+   "lootboxesshells_higheffort": 1,
+   "lootboxesparts_higheffort_m": 1
   }
  },
  "Tieftauchparadies": {

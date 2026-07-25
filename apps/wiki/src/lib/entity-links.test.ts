@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { groupLootByTier, isLinkRole, linkFields, LINK_ROLES, type LinkRow } from "./entity-links";
+import { entityHref, groupLootByTier, isLinkRole, linkFields, LINK_ROLES, type LinkRow } from "./entity-links";
 
 const row = (over: Partial<LinkRow>): LinkRow => ({
   targetSlug: null, targetKind: null, name: "x", icon: null, rarity: null,
@@ -64,6 +64,15 @@ describe("groupLootByTier ordering", () => {
       row({ tier: "Very Rare" }), row({ tier: "Normal" }), row({ tier: "Rare" }),
     ]);
     expect(groups.map((g) => g.tier)).toEqual(["Normal", "Rare", "Very Rare"]);
+  });
+});
+
+describe("entityHref", () => {
+  it("maps NPCs (environment kind) to /environment/<slug>", () => {
+    expect(entityHref("environment", "upior")).toBe("/environment/upior");
+  });
+  it("returns null for unknown kinds", () => {
+    expect(entityHref("mystery", "x")).toBeNull();
   });
 });
 

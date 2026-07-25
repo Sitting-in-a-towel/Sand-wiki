@@ -1,5 +1,18 @@
 {
   "ironclad-s-cargo-box": { "disabled": true },
+  "artefactcrystal": { "disabled": true },
+  "repairkit": { "disabled": true },
+  "old-jacket-2": { "disabled": true },
+  "old-jackett3": { "disabled": true },
+  "m1866-9-pioneer-breechloader": { "disabled": true },
+  "game-keyislanddoorgreen": { "disabled": true },
+  "game-keylockedbox": { "disabled": true },
+  "v1-repair-patch": { "disabled": true },
+  "factorio": { "disabled": true },
+  "dreadnaught": { "name": "Dreadnought", "descriptionAppend": "Storm Dive finale — it only turns up on 9-city maps, and it's the likelier of the two event finales: about 2 in 3 (double the [[ship-graveyard]]'s odds)." },
+  "storm-dive": { "descriptionAppend": "Finales: every map has one finale location. Count the cities (ignore the 4 forts) — 10 cities means an ordinary island is the finale (nothing special); 9 cities means an event finale: either the [[dreadnaught]] (~2 in 3) or the [[ship-graveyard]] worm pit (~1 in 3). Note: the ~2/3 split is observed, not confirmed from the game files." },
+  "fort-tarndpol": { "name": "Fort Tarnopol" },
+  "archipel-von-leopold": { "name": "Archipel von Leopold" },
   "game-alarm-lock-box-black": { "name": "Box with Radio Beacon (Black)" },
   "game-alarm-lock-box-green": { "name": "Box with Radio Beacon (Green)" },
   "game-alarm-lock-box-yellow": { "name": "Box with Radio Beacon (Yellow)" }

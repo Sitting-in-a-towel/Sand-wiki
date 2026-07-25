@@ -1,0 +1,7 @@
+{
+  "cats": [["container", "Containers", "#c9a24b"]],
+  "loccats": [["island", "Islands"]],
+  "locations": [
+    { "key": "poi_Test", "glb": "poi_Test.glb.gz", "label": "Test POI", "cat": "island", "objects": 0, "things": [] }
+  ]
+}

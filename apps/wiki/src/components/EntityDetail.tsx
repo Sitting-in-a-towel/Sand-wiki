@@ -28,7 +28,6 @@ export interface EntityDetailProps {
   tabs?: Tab[];
   /** Shown in the main column when there are no tabs (e.g. the item "no data" message). */
   tabsEmptyFallback?: React.ReactNode;
-  sourceUrl?: string | null;
   /** Renders a "Disabled" badge near the title (admins only ever see disabled rows). */
   disabled?: boolean;
   /** Admin-only control strip (image edit + disable toggle), shown at the very bottom. */
@@ -56,7 +55,6 @@ export function EntityDetail({
   detailRows,
   tabs,
   tabsEmptyFallback,
-  sourceUrl,
   disabled,
   adminControls,
 }: EntityDetailProps) {
@@ -71,20 +69,6 @@ export function EntityDetail({
       <SectionTitle>Statistics</SectionTitle>
       <StatGrid cells={stats!} />
     </section>
-  ) : null;
-
-  const source = sourceUrl ? (
-    <p className="text-sm text-muted-foreground">
-      Source:{" "}
-      <a
-        href={sourceUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-primary underline underline-offset-2 hover:text-primary-hover"
-      >
-        sandgame.wiki ↗
-      </a>
-    </p>
   ) : null;
 
   return (
@@ -139,8 +123,6 @@ export function EntityDetail({
           {main !== null && <div className="min-w-0">{main}</div>}
         </div>
       )}
-
-      {source}
 
       {adminControls && (
         <div className="border border-border-strong bg-card-elevated p-4">{adminControls}</div>
